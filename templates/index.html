@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Minkowski Sum Calculator{% endblock %}
+
+{% block header %}
+<header class="header">
+    <h2>Minkowski Sum Calculator</h2>
+    <div class="button-container">
+        <button id="restart" class="button">Restart</button>
+        <button id="export" class="button">Export</button>
+        <button class="circle-button"><i class="fa-solid fa-gear"></i></button>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="main-content">
+    <div class="canvas">
+        <canvas id="myChart"></canvas>
+        <div style="position: absolute; top: 20px; right: 30px; display: flex; gap: 5px;">
+            <button id="zoomIn" class="circle-button">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <button id="zoomOut" class="circle-button">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+        </div>
+    </div>
+</main>
+{% include 'includes/menu.html' %}
+{% include 'includes/modals.html' %}
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+    <div class="button-container">
+        <button id="undo" class="button"><i class="fas fa-undo fa-lg"></i></button>
+        <button id="redo" class="button"><i class="fas fa-redo fa-lg"></i></button>
+        <button class="circle-button"><i class="fa-solid fa-question"></i></button>
+    </div>
+    <div class="button-container-right">
+        <button class="button">Finish Figure</button>
+    </div>
+</footer>
+{% endblock %}
