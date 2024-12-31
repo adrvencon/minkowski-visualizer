@@ -8,7 +8,7 @@ def is_closed(coords):
     return first_point == last_point
 
 def is_convex(coords):
-    pass # TODO: Comprobar que la figura sea convexa.
+    return True # TODO: Comprobar que la figura sea convexa.
 
 def validate_figure(coords):
     if not is_closed(coords):
