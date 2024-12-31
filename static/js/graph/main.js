@@ -4,8 +4,11 @@ import { generateCircleOrEllipse, generateCurve, generateLineOrPolygon } from '.
 
 function createGraph() {
     const ctx = document.getElementById('myChart').getContext('2d');
+
     const undoStack = [];
     const redoStack = [];
+
+    const savedFigures = [];
 
     const data = {
         datasets: []
@@ -184,11 +187,21 @@ function createGraph() {
                 throw new Error(result.error || 'Validation error.');
             }
     
-            alert('Figura válida: ' + result.status);
+            alert('Valid figure: ' + result.status);
+            savedFigures.push(coords);
+    
+            if (savedFigures.length === 2) {
+                alert('Two figures saved.');
+            } else {
+                alert('Figure saved. Please draw the next one.');
+            }
+    
+            chart.data.datasets = [];
+            chart.update();
         } catch (error) {
             alert(`Error: ${error.message}`);
         }
-    });
+    });    
     
 }
 
