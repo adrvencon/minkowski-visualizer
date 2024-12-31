@@ -10,6 +10,8 @@ function generateCircleOrEllipse(centerX, centerY, radiusX, radiusY, color) {
         data.push({ x, y });
     }
 
+    data.push(data[0]); // Cerrando el círculo.
+
     return createGraphDataset(data, color, true);
 }
 

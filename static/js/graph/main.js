@@ -115,6 +115,31 @@ function createGraph() {
         link.download = 'graph.png';
         link.click();
     });
+
+    document.getElementById('finishFigure').addEventListener('click', async function () {
+        try {
+            const datasets = chart.data.datasets;
+            const coords = datasets.flatMap(dataset => dataset.data);
+    
+            const response = await fetch('/validate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ coords }),
+            });
+    
+            const result = await response.json();
+            if (!response.ok) {
+                throw new Error(result.error || 'Validation error.');
+            }
+    
+            alert('Figura válida: ' + result.status);
+        } catch (error) {
+            alert(`Error: ${error.message}`);
+        }
+    });
+    
 }
 
 window.onload = function() {
