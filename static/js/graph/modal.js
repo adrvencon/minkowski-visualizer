@@ -2,9 +2,18 @@ function openLinePolygonModal(isPolygon, submitCallback) {
     const modal = document.getElementById('linePolygonModal');
     const coordinatesInput = document.getElementById('coordinatesInput');
     const submitButton = document.getElementById('submitCoordinates');
+    const errorMessage = document.getElementById('linePolygonError');
 
     submitButton.onclick = function() {
         const coordinates = coordinatesInput.value.trim();
+
+        if (!coordinates) {
+            errorMessage.textContent = 'Please enter coordinates.';
+            errorMessage.style.display = 'block';
+            return;
+        }
+
+        errorMessage.style.display = 'none';
         modal.style.display = 'none';
         submitCallback(coordinates, isPolygon, 'blue');
     };
@@ -19,6 +28,7 @@ function openCircleEllipseModal(submitCallback) {
     const radiusXInput = document.getElementById('radiusX');
     const radiusYInput = document.getElementById('radiusY');
     const submitButton = document.getElementById('submitCircleEllipse');
+    const errorMessage = document.getElementById('circleEllipseError');
 
     submitButton.onclick = function() {
         const centerX = parseFloat(centerXInput.value);
@@ -26,6 +36,13 @@ function openCircleEllipseModal(submitCallback) {
         const radiusX = parseFloat(radiusXInput.value);
         const radiusY = parseFloat(radiusYInput.value);
 
+        if (isNaN(centerX) || isNaN(centerY) || isNaN(radiusX) || isNaN(radiusY)) {
+            errorMessage.textContent = 'All fields are required and must be valid numbers.';
+            errorMessage.style.display = 'block';
+            return;
+        }
+
+        errorMessage.style.display = 'none';
         modal.style.display = 'none';
         submitCallback(centerX, centerY, radiusX, radiusY, 'red');
     };
@@ -35,18 +52,31 @@ function openCircleEllipseModal(submitCallback) {
 
 function openCurveModal(submitCallback) {
     const modal = document.getElementById('curveModal');
-    modal.style.display = 'flex';
-
+    const functionInput = document.getElementById('curveFunction');
+    const rangeStartInput = document.getElementById('rangeStart');
+    const rangeEndInput = document.getElementById('rangeEnd');
+    const stepSizeInput = document.getElementById('stepSize');
     const submitButton = document.getElementById('submitCurve');
-    submitButton.onclick = function () {
-        const functionString = document.getElementById('curveFunction').value.trim();
-        const rangeStart = parseFloat(document.getElementById('rangeStart').value);
-        const rangeEnd = parseFloat(document.getElementById('rangeEnd').value);
-        const stepSize = parseFloat(document.getElementById('stepSize').value);
+    const errorMessage = document.getElementById('curveError');
 
+    submitButton.onclick = function () {
+        const functionString = functionInput.value.trim();
+        const rangeStart = parseFloat(rangeStartInput.value);
+        const rangeEnd = parseFloat(rangeEndInput.value);
+        const stepSize = parseFloat(stepSizeInput.value);
+
+        if (!functionString || isNaN(rangeStart) || isNaN(rangeEnd) || isNaN(stepSize)) {
+            errorMessage.textContent = 'All fields are required and must be valid.';
+            errorMessage.style.display = 'block';
+            return;
+        }
+
+        errorMessage.style.display = 'none';
         modal.style.display = 'none';
         submitCallback(functionString, rangeStart, rangeEnd, stepSize, 'green');
     };
+
+    modal.style.display = 'flex';
 }
 
 export { openLinePolygonModal, openCircleEllipseModal, openCurveModal };

@@ -5,6 +5,7 @@
             <label for="coordinatesInput">Coordinates (x,y) separated by spaces:</label>
             <input id="coordinatesInput" type="text" placeholder="e.g. 0,0 1,0 1,1 0,1" />
         </div>
+        <div id="linePolygonError" style="display: none; color: red;"></div>
         <button id="submitCoordinates">Submit</button>
         <button id="closeModal">Close</button>
     </div>
@@ -29,6 +30,7 @@
             <label for="radiusY">Radius Y (for Circle, use same value as X):</label>
             <input id="radiusY" type="number" placeholder="e.g. 5" />
         </div>
+        <div id="circleEllipseError" style="display: none; color: red;"></div>
         <button id="submitCircleEllipse">Submit</button>
         <button id="closeCircleEllipseModal">Close</button>
     </div>
@@ -53,6 +55,7 @@
             <label for="stepSize">Step Size (e.g., 0.1):</label>
             <input id="stepSize" type="number" placeholder="0.1" step="0.01" />
         </div>
+        <div id="curveError" style="display: none; color: red;"></div>
         <button id="submitCurve">Submit</button>
         <button id="closeCurveModal">Close</button>
     </div>
