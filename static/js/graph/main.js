@@ -90,6 +90,25 @@ function createGraph() {
         openCircleEllipseModal(handleCircleOrEllipse);
     });
 
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+    
+    document.getElementById('closeModal').addEventListener('click', function() {
+        closeModal('linePolygonModal');
+    });
+    
+    document.getElementById('closeCircleEllipseModal').addEventListener('click', function() {
+        closeModal('circleEllipseModal');
+    });
+    
+    document.getElementById('closeCurveModal').addEventListener('click', function() {
+        closeModal('curveModal');
+    });
+
     document.getElementById('curve').addEventListener('click', function () {
         openCurveModal(handleCurve);
     });
