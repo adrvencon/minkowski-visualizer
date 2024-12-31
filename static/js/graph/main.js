@@ -4,6 +4,8 @@ import { generateCircleOrEllipse, generateCurve, generateLineOrPolygon } from '.
 
 function createGraph() {
     const ctx = document.getElementById('myChart').getContext('2d');
+    const undoStack = [];
+    const redoStack = [];
 
     const data = {
         datasets: []
@@ -63,17 +65,46 @@ function createGraph() {
         options: options
     });
 
+    function saveState() {
+        undoStack.push(JSON.stringify(chart.data.datasets));
+        redoStack.length = 0;
+    }
+
+    function restoreState(state) {
+        chart.data.datasets = JSON.parse(state);
+        chart.update();
+    }
+
+    document.getElementById('undo').addEventListener('click', function() {
+        if (undoStack.length > 0) {
+            const lastState = undoStack.pop();
+            redoStack.push(JSON.stringify(chart.data.datasets));
+            restoreState(lastState);
+        }
+    });
+
+    document.getElementById('redo').addEventListener('click', function() {
+        if (redoStack.length > 0) {
+            const nextState = redoStack.pop();
+            undoStack.push(JSON.stringify(chart.data.datasets));
+            restoreState(nextState);
+        }
+    });
+
     function handleLineOrPolygon(coordinates, isPolygon = false, color) {
+        saveState();
         const figure = generateLineOrPolygon(coordinates, isPolygon, color);
         updateGraphData(chart, figure);
     }
 
     function handleCircleOrEllipse(centerX, centerY, radiusX, radiusY, color) {
+        saveState();
         const figure = generateCircleOrEllipse(centerX, centerY, radiusX, radiusY, color);
         updateGraphData(chart, figure);
     }
 
     function handleCurve(functionString, rangeStart, rangeEnd, stepSize, color) {
+        saveState();
         const figure = generateCurve(functionString, rangeStart, rangeEnd, stepSize, color);
         updateGraphData(chart, figure);
     }
