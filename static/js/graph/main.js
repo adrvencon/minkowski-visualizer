@@ -240,7 +240,6 @@ function createGraph() {
                 throw new Error(result.error || 'Validation error.');
             }
     
-            alert('Valid figure: ' + result.status);
             savedFigures.push(coords);
     
             if (savedFigures.length === 2) {

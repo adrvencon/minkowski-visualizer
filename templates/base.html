@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
@@ -23,6 +25,20 @@
         {% endblock %}
     </div>
 
+    <script>
+        const notyf = new Notyf();
+    
+        window.alert = function(message) {
+            notyf.open({
+                type: 'info',
+                message: message,
+                duration: 3000,
+                backgroundColor: '#c7c7c7',
+                ripple: false,
+            });
+        };
+    </script>
+    
     {% block scripts %}
     <script type="module" src="{{ url_for('static', filename='js/graph/main.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/includes/menu.js') }}"></script>
