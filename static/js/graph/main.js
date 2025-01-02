@@ -108,7 +108,7 @@ function createGraph() {
 
     document.getElementById('redo').addEventListener('click', function() {
         if (minkowskiSumComputed) {
-            alert('Cannot undo after Minkowski sum has been computed.');
+            alert('Cannot redo after Minkowski sum has been computed.');
         } else {
             if (redoStack.length > 0) {
                 const nextState = redoStack.pop();
