@@ -64,6 +64,25 @@ body {
   transition: all 0.3s ease;
 }
 
+.button:hover {
+  background-color: #ccc;
+  border-color: #999;
+  color: #fff;
+}
+
+.button:disabled {
+  background-color: #e0e0e0; 
+  border-color: #d8d8d8;
+  color: #a1a1a1;
+  cursor: not-allowed;
+}
+
+.button:disabled:hover {
+  background-color: #e0e0e0;
+  border-color: #d8d8d8;
+  color: #a1a1a1;
+}
+
 .circle-button {
   display: inline-block;
   width: 50px;
@@ -85,10 +104,17 @@ body {
   color: #fff;
 }
 
-.button:hover {
-  background-color: #ccc;
-  border-color: #999;
-  color: #fff;
+.circle-button:disabled {
+  background-color: #e0e0e0; 
+  border-color: #d8d8d8;
+  color: #a1a1a1;
+  cursor: not-allowed;
+}
+
+.circle-button:hover {
+  background-color: #e0e0e0;
+  border-color: #d8d8d8;
+  color: #a1a1a1;
 }
 
 .menu-container {

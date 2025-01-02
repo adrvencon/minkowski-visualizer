@@ -3,7 +3,7 @@ function updateGraphData(chart, figure) {
     chart.update();
 }
 
-function createGraphDataset(data, color, isSolid = false) {
+function createGraphDataset(data, color = 'rgb(0, 0, 0)', isSolid = false) {
     return {
         data: data,
         fill: isSolid ? 'shape' : false,

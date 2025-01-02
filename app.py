@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request
+from computations.minkowski import minkowski_sum
 from computations.validations import validate_figure
 
 app = Flask(__name__)
@@ -26,6 +27,18 @@ def validate():
         return jsonify({"error": str(e)}), 400
     except Exception as e:
         return jsonify({"error": "Unexpected error: " + str(e)}), 500
+    
+@app.route('/minkowski-sum', methods=['POST'])
+def calculate_minkowski_sum():
+    try:
+        data = request.get_json()
+        figure1 = data['figure1']
+        figure2 = data['figure2']
+        
+        result = minkowski_sum(figure1, figure2)
+        return jsonify({'sum': result})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)

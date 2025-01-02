@@ -1,9 +1,11 @@
 import { updateGraphData } from './chart.js';
 import { openLinePolygonModal, openCircleEllipseModal, openCurveModal } from './modal.js';
-import { generateCircleOrEllipse, generateCurve, generateLineOrPolygon } from './figures.js';
+import { generateCircleOrEllipse, generateCurve, generateLineOrPolygon, generateMinkowskiSum } from './figures.js';
 
 function createGraph() {
     const ctx = document.getElementById('myChart').getContext('2d');
+
+    let minkowskiSumComputed = false;
 
     const undoStack = [];
     const redoStack = [];
@@ -55,7 +57,7 @@ function createGraph() {
                     mode: 'xy',
                 },
                 pan: {
-                    enabled: false,
+                    enabled: true,
                     mode: 'xy',
                 },
             },
@@ -68,6 +70,20 @@ function createGraph() {
         options: options
     });
 
+    function updateButtonState() {
+        const finishFigureButton = document.getElementById('finishFigure');
+        const minkowskiSumButton = document.getElementById('minkowskiSum');
+        const restartFigureButton = document.getElementById('restartFigure');
+        const undoButton = document.getElementById('undo');
+        const redoButton = document.getElementById('redo');
+    
+        finishFigureButton.disabled = savedFigures.length === 2 || minkowskiSumComputed;
+        minkowskiSumButton.disabled = savedFigures.length !== 2 || minkowskiSumComputed;
+        restartFigureButton.disabled = savedFigures.length === 2;
+        undoButton.disabled = savedFigures.length === 2;
+        redoButton.disabled = savedFigures.length === 2;
+    }
+
     function saveState() {
         undoStack.push(JSON.stringify(chart.data.datasets));
         redoStack.length = 0;
@@ -79,18 +95,26 @@ function createGraph() {
     }
 
     document.getElementById('undo').addEventListener('click', function() {
-        if (undoStack.length > 0) {
-            const lastState = undoStack.pop();
-            redoStack.push(JSON.stringify(chart.data.datasets));
-            restoreState(lastState);
+        if (minkowskiSumComputed) {
+            alert('Cannot undo after Minkowski sum has been computed.');
+        } else {
+            if (undoStack.length > 0) {
+                const lastState = undoStack.pop();
+                redoStack.push(JSON.stringify(chart.data.datasets));
+                restoreState(lastState);
+            }
         }
     });
 
     document.getElementById('redo').addEventListener('click', function() {
-        if (redoStack.length > 0) {
-            const nextState = redoStack.pop();
-            undoStack.push(JSON.stringify(chart.data.datasets));
-            restoreState(nextState);
+        if (minkowskiSumComputed) {
+            alert('Cannot undo after Minkowski sum has been computed.');
+        } else {
+            if (redoStack.length > 0) {
+                const nextState = redoStack.pop();
+                undoStack.push(JSON.stringify(chart.data.datasets));
+                restoreState(nextState);
+            }
         }
     });
 
@@ -165,8 +189,24 @@ function createGraph() {
 
     document.getElementById('restart').addEventListener('click', function() {
         chart.data.datasets = [];
-        chart.resetZoom();
         chart.update();
+        undoStack.length = 0;
+        redoStack.length = 0;
+        savedFigures.length = 0;
+        chart.resetZoom();
+        minkowskiSumComputed = false;
+        updateButtonState();
+    });
+
+    document.getElementById('restartFigure').addEventListener('click', function() {
+        if (minkowskiSumComputed) {
+            alert('Cannot restart the figure after Minkowski sum has been computed.');
+        } else {
+            chart.data.datasets = [];
+            chart.resetZoom();
+            chart.update();
+            updateButtonState();
+        }
     });
 
     document.getElementById('export').addEventListener('click', function() {
@@ -178,6 +218,11 @@ function createGraph() {
     });
 
     document.getElementById('finishFigure').addEventListener('click', async function () {
+        if (savedFigures.length === 2) {
+            alert('You have already saved two figures.');
+            return;
+        }
+
         try {
             const datasets = chart.data.datasets;
             const coords = datasets.flatMap(dataset => dataset.data);
@@ -200,6 +245,9 @@ function createGraph() {
     
             if (savedFigures.length === 2) {
                 alert('Two figures saved.');
+                undoStack.length = 0;
+                redoStack.length = 0;
+                updateButtonState();
             } else {
                 alert('Figure saved. Please draw the next one.');
             }
@@ -209,7 +257,57 @@ function createGraph() {
         } catch (error) {
             alert(`Error: ${error.message}`);
         }
-    });    
+    });
+
+    document.getElementById('minkowskiSum').addEventListener('click', handleMinkowskiSum);
+
+    async function calculateMinkowskiSum(figure1, figure2) {
+        if (savedFigures.length < 2) {
+            alert('You must draw two figures before computing the sum.');
+            return;
+        }
+    
+        if (minkowskiSumComputed) {
+            alert('Minkowski sum already computed.');
+            return;
+        }
+        try {
+            const response = await fetch('/minkowski-sum', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ figure1, figure2 }),
+            });
+    
+            const result = await response.json();
+            if (response.ok) {
+                return result.sum;
+            } else {
+                throw new Error(result.error || 'Computation error.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    
+    async function handleMinkowskiSum() {
+        if (savedFigures.length === 2) {
+            const [figure1, figure2] = savedFigures;
+            
+            const result = await calculateMinkowskiSum(figure1, figure2);
+            
+            if (result) {
+                saveState();
+                const figure = generateMinkowskiSum(result);
+                updateGraphData(chart, figure);
+                minkowskiSumComputed = true;
+                updateButtonState();
+            }
+        } else {
+            alert('You must draw two figures before computing the sum.');
+        }
+    }
     
 }
 

@@ -49,4 +49,14 @@ function generateLineOrPolygon(coordinates, isPolygon = false, color) {
     );
 }
 
-export { generateCircleOrEllipse, generateCurve, generateLineOrPolygon };
+function generateMinkowskiSum(coordinates) {
+    const closedCoordinates = [...coordinates, coordinates[0]];
+
+    return createGraphDataset(
+        closedCoordinates,
+        'rgb',
+        true
+    );
+}
+
+export { generateCircleOrEllipse, generateCurve, generateLineOrPolygon, generateMinkowskiSum };
