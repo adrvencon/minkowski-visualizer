@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, render_template, request
 from computations.minkowski import minkowski_sum
 from computations.validations import validate_figure
@@ -41,4 +42,5 @@ def calculate_minkowski_sum():
         return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
