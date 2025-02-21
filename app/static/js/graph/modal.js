@@ -13,13 +13,33 @@ function openLinePolygonModal(isPolygon, submitCallback) {
             return;
         }
 
-        errorMessage.style.display = 'none';
-        modal.style.display = 'none';
-        submitCallback(coordinates, isPolygon, 'blue');
+        fetch('/validate-polygon', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ coords: coordinates }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                errorMessage.textContent = data.error;
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+                modal.style.display = 'none';
+                submitCallback(coordinates, isPolygon, 'blue');
+            }
+        })
+        .catch(error => {
+            errorMessage.textContent = 'An error occurred while validating coordinates.';
+            errorMessage.style.display = 'block';
+        });
     };
 
     modal.style.display = 'flex';
 }
+
 
 function openCircleEllipseModal(submitCallback) {
     const modal = document.getElementById('circleEllipseModal');
@@ -42,9 +62,33 @@ function openCircleEllipseModal(submitCallback) {
             return;
         }
 
-        errorMessage.style.display = 'none';
-        modal.style.display = 'none';
-        submitCallback(centerX, centerY, radiusX, radiusY, 'red');
+        fetch('/validate-circle-ellipse', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                centerX: centerX,
+                centerY: centerY,
+                radiusX: radiusX,
+                radiusY: radiusY,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                errorMessage.textContent = data.error;
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+                modal.style.display = 'none';
+                submitCallback(centerX, centerY, radiusX, radiusY, 'red');
+            }
+        })
+        .catch(error => {
+            errorMessage.textContent = 'An error occurred while validating circle/ellipse data.';
+            errorMessage.style.display = 'block';
+        });
     };
 
     modal.style.display = 'flex';
@@ -71,12 +115,37 @@ function openCurveModal(submitCallback) {
             return;
         }
 
-        errorMessage.style.display = 'none';
-        modal.style.display = 'none';
-        submitCallback(functionString, rangeStart, rangeEnd, stepSize, 'green');
+        fetch('/validate-curve', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                functionString: functionString,
+                rangeStart: rangeStart,
+                rangeEnd: rangeEnd,
+                stepSize: stepSize,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                errorMessage.textContent = data.error;
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+                modal.style.display = 'none';
+                submitCallback(functionString, rangeStart, rangeEnd, stepSize, 'green');
+            }
+        })
+        .catch(error => {
+            errorMessage.textContent = 'An error occurred while validating curve data.';
+            errorMessage.style.display = 'block';
+        });
     };
 
     modal.style.display = 'flex';
 }
+
 
 export { openLinePolygonModal, openCircleEllipseModal, openCurveModal };
