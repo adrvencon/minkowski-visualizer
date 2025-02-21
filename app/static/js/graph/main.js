@@ -17,6 +17,8 @@ function createGraph() {
     };
 
     const options = {
+        maintainAspectRatio: true,
+        responsive: true,   
         scales: {
             x: {
                 type: 'linear',
@@ -24,10 +26,15 @@ function createGraph() {
                 min: -10,
                 max: 10,
                 ticks: {
-                    color: 'rgba(0, 0, 0, 0.8)',
+                    color: 'black',
+                    stepSize: 1,
                 },
                 grid: {
-                    color: 'rgba(0, 0, 0, 0.1)',
+                    color: '#c0c0c0',
+                    lineWidth: 0.5,
+                },
+                border: {
+                    color: '#636363',
                 },
             },
             y: {
@@ -35,10 +42,15 @@ function createGraph() {
                 min: -10,
                 max: 10,
                 ticks: {
-                    color: 'rgba(0, 0, 0, 0.8)',
+                    color: 'black',
+                    stepSize: 1,
                 },
                 grid: {
-                    color: 'rgba(0, 0, 0, 0.1)',
+                    color: '#c0c0c0',
+                    lineWidth: 0.5,
+                },
+                border: {
+                    color: '#636363',
                 },
             },
         },
@@ -69,6 +81,28 @@ function createGraph() {
         data: data,
         options: options
     });
+
+    function adjustScale() {
+        const chartArea = chart.chartArea;
+        if (!chartArea) return;
+
+        const width = chartArea.right - chartArea.left;
+        const height = chartArea.bottom - chartArea.top;
+        const aspectRatio = width / height;
+
+        const xRange = chart.options.scales.x.max - chart.options.scales.x.min;
+        const yRange = xRange / aspectRatio;
+
+        const yMid = (chart.options.scales.y.max + chart.options.scales.y.min) / 2;
+        chart.options.scales.y.min = yMid - yRange / 2;
+        chart.options.scales.y.max = yMid + yRange / 2;
+
+        chart.update();
+    }
+
+    adjustScale();
+
+    window.addEventListener('resize', adjustScale);
 
     function updateButtonState() {
         const finishFigureButton = document.getElementById('finishFigure');
