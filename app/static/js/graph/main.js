@@ -238,6 +238,7 @@ function createGraph() {
         savedFigures.length = 0;
         chart.resetZoom();
         minkowskiSumComputed = false;
+        updateLegendVisibility();
         updateButtonState();
     });
 
