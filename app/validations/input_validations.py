@@ -1,7 +1,7 @@
 import re
 
 def validate_polygon_coordinates(coords):
-    if not re.match(r'^(\d+(\.\d+)?\,\d+(\.\d+)?\s*)+$', coords):
+    if not re.match(r'^(-?\d+(\.\d+)?,-?\d+(\.\d+)?(\s+-?\d+(\.\d+)?,-?\d+(\.\d+)?\s*)*)$', coords):
         raise ValueError("Invalid input. The format should be 'x,y x,y x,y ...'.")
     return coords
 
