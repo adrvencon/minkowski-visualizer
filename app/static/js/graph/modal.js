@@ -1,24 +1,68 @@
 function openLinePolygonModal(isPolygon, submitCallback) {
     const modal = document.getElementById('linePolygonModal');
-    const coordinatesInput = document.getElementById('coordinatesInput');
+    const tableBody = document.querySelector('#coords-table tbody');
+    const addRowButton = document.getElementById('addRowButton');
     const submitButton = document.getElementById('submitCoordinates');
     const errorMessage = document.getElementById('linePolygonError');
 
-    submitButton.onclick = function() {
-        const coordinates = coordinatesInput.value.trim();
+    tableBody.innerHTML = '';
+    errorMessage.textContent = '';
+    errorMessage.style.display = 'none';
 
-        if (!coordinates) {
-            errorMessage.textContent = 'Please enter coordinates.';
-            errorMessage.style.display = 'block';
-            return;
+    function addRow(x = '', y = '') {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td><input type="number" step="0.01" value="${x}"></td>
+            <td><input type="number" step="0.01" value="${y}"></td>
+            <td><button class="removeRowButton">-</button></td>
+        `;
+        tableBody.appendChild(newRow);
+
+        const removeButton = newRow.querySelector('.removeRowButton');
+        removeButton.addEventListener('click', () => {
+            if (tableBody.children.length > 1) {
+                newRow.remove();
+            }
+        });
+        
+        if (tableBody.children.length <= 1) {
+            removeButton.disabled = true;
         }
+    }
+
+    addRow();
+    addRow();
+
+    const newAddRowButton = addRowButton.cloneNode(true);
+    addRowButton.parentNode.replaceChild(newAddRowButton, addRowButton);
+
+    newAddRowButton.addEventListener('click', () => {
+        addRow();
+        const removeButton = document.querySelectorAll('.removeRowButton');
+        if (tableBody.children.length > 1) {
+            removeButton.disabled = true;
+        }
+    });
+
+    submitButton.onclick = function() {
+        const inputs = document.querySelectorAll('#coords-table input');
+        const coords = [];
+
+        for (let i = 0; i < inputs.length; i += 2) {
+            const x = parseFloat(inputs[i].value);
+            const y = parseFloat(inputs[i + 1].value);
+
+            coords.push({ x, y });
+        }
+
+        const coordinatesString = coords.map(coord => `${coord.x},${coord.y}`).join(' ');
 
         fetch('/validate-polygon', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ coords: coordinates }),
+            body: JSON.stringify({ coords: coordinatesString }),
         })
         .then(response => response.json())
         .then(data => {
@@ -28,7 +72,7 @@ function openLinePolygonModal(isPolygon, submitCallback) {
             } else {
                 errorMessage.style.display = 'none';
                 modal.style.display = 'none';
-                submitCallback(coordinates, isPolygon, 'blue');
+                submitCallback(coordinatesString, isPolygon, 'blue');
             }
         })
         .catch(error => {

@@ -1,10 +1,19 @@
 <div id="linePolygonModal" class="coordinate-modal" style="display: none;">
     <div class="coordinate-modal-content">
         <h2>Enter Coordinates for Figure</h2>
-        <div>
-            <label for="coordinatesInput">Coordinates (x,y) separated by spaces:</label>
-            <input id="coordinatesInput" type="text" placeholder="e.g. 0,0 1,0 1,1 0,1" />
-        </div>
+        <table id="coords-table">
+            <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas dinámicas. -->
+            </tbody>
+        </table>
+        <button id="addRowButton">Add Row</button>
         <div id="linePolygonError" style="display: none; color: red;"></div>
         <button id="submitCoordinates">Submit</button>
         <button id="closeModal">Close</button>
