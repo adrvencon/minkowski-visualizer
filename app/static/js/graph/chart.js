@@ -11,7 +11,7 @@ function createGraphDataset(data, color = 'rgb(0, 0, 0)', isSolid = false, label
         borderColor: color,
         backgroundColor: 'rgba(169, 169, 169, 0.5)',
         borderWidth: 2,
-        pointRadius: 3,
+        pointRadius: 2,
         pointBackgroundColor: color,
         tension: 0
     };
