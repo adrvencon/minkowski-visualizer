@@ -298,7 +298,7 @@ function createGraph() {
             chart.data.datasets = [];
             chart.update();
         } catch (error) {
-            alert(`Error: ${error.message}`);
+            alert(`${error.message}`);
         }
     });
 
@@ -330,7 +330,7 @@ function createGraph() {
                 throw new Error(result.error || 'Computation error.');
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error(error);
         }
     }
     
