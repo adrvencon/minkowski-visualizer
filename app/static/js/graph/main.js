@@ -1,4 +1,4 @@
-import { updateGraphData } from './chart.js';
+import { updateGraphData, createBaseFiguresDataset } from './chart.js';
 import { openLinePolygonModal, openCircleEllipseModal, openCurveModal } from './modal.js';
 import { generateCircleOrEllipse, generateCurve, generateLineOrPolygon, generateMinkowskiSum } from './figures.js';
 
@@ -18,7 +18,7 @@ function createGraph() {
 
     const options = {
         maintainAspectRatio: true,
-        responsive: true,   
+        responsive: true,
         scales: {
             x: {
                 type: 'linear',
@@ -81,6 +81,12 @@ function createGraph() {
         data: data,
         options: options
     });
+
+    function updateLegendVisibility() {
+        const hasLabels = chart.data.datasets.some(dataset => dataset.label);
+        chart.options.plugins.legend.display = hasLabels;
+        chart.update();
+    }
 
     function adjustScale() {
         const chartArea = chart.chartArea;
@@ -332,9 +338,14 @@ function createGraph() {
             
             if (result) {
                 saveState();
+                const baseFigure1 = createBaseFiguresDataset(figure1, 'Figure 1');
+                const baseFigure2 = createBaseFiguresDataset(figure2, 'Figure 2');
+                chart.data.datasets.push(baseFigure1, baseFigure2);
+
                 const figure = generateMinkowskiSum(result);
                 updateGraphData(chart, figure);
                 minkowskiSumComputed = true;
+                updateLegendVisibility();
                 updateButtonState();
             }
         } else {

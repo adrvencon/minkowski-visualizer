@@ -3,8 +3,9 @@ function updateGraphData(chart, figure) {
     chart.update();
 }
 
-function createGraphDataset(data, color = 'rgb(0, 0, 0)', isSolid = false) {
+function createGraphDataset(data, color = 'rgb(0, 0, 0)', isSolid = false, label = undefined) {
     return {
+        label: label,
         data: data,
         fill: isSolid ? 'shape' : false,
         borderColor: color,
@@ -16,4 +17,16 @@ function createGraphDataset(data, color = 'rgb(0, 0, 0)', isSolid = false) {
     };
 }
 
-export { updateGraphData, createGraphDataset };
+function createBaseFiguresDataset(data, label) {
+    return {
+        label: label,
+        data: data,
+        borderColor: 'grey',
+        borderWidth: 1,
+        borderDash: [5, 5],
+        fill: false,
+        pointRadius: 0,
+    };
+}
+
+export { updateGraphData, createGraphDataset, createBaseFiguresDataset };

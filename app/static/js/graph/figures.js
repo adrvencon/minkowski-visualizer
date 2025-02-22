@@ -55,7 +55,8 @@ function generateMinkowskiSum(coordinates) {
     return createGraphDataset(
         closedCoordinates,
         'rgb',
-        true
+        true,
+        "Minkowski Sum"
     );
 }
 
