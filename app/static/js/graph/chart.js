@@ -1,8 +1,3 @@
-function updateGraphData(chart, figure) {
-    chart.data.datasets.push(figure);
-    chart.update();
-}
-
 function createGraphDataset(data, color = 'rgb(0, 0, 0)', isSolid = false, label = undefined) {
     return {
         label: label,
@@ -29,4 +24,4 @@ function createBaseFiguresDataset(data, label) {
     };
 }
 
-export { updateGraphData, createGraphDataset, createBaseFiguresDataset };
+export { createGraphDataset, createBaseFiguresDataset };

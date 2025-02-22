@@ -1,4 +1,4 @@
-import { updateGraphData, createBaseFiguresDataset } from './chart.js';
+import { createBaseFiguresDataset } from './chart.js';
 import { openLinePolygonModal, openCircleEllipseModal, openCurveModal } from './modal.js';
 import { generateCircleOrEllipse, generateCurve, generateLineOrPolygon, generateMinkowskiSum } from './figures.js';
 
@@ -161,19 +161,22 @@ function createGraph() {
     function handleLineOrPolygon(coordinates, isPolygon = false, color) {
         saveState();
         const figure = generateLineOrPolygon(coordinates, isPolygon, color);
-        updateGraphData(chart, figure);
+        chart.data.datasets.push(figure);
+        chart.update();
     }
 
     function handleCircleOrEllipse(centerX, centerY, radiusX, radiusY, color) {
         saveState();
         const figure = generateCircleOrEllipse(centerX, centerY, radiusX, radiusY, color);
-        updateGraphData(chart, figure);
+        chart.data.datasets.push(figure);
+        chart.update();
     }
 
     function handleCurve(functionString, rangeStart, rangeEnd, stepSize, color) {
         saveState();
         const figure = generateCurve(functionString, rangeStart, rangeEnd, stepSize, color);
-        updateGraphData(chart, figure);
+        chart.data.datasets.push(figure);
+        chart.update();
     }
 
     document.getElementById('line').addEventListener('click', function() {
@@ -343,7 +346,8 @@ function createGraph() {
                 chart.data.datasets.push(baseFigure1, baseFigure2);
 
                 const figure = generateMinkowskiSum(result);
-                updateGraphData(chart, figure);
+                chart.data.datasets.push(figure);
+                chart.update();
                 minkowskiSumComputed = true;
                 updateLegendVisibility();
                 updateButtonState();
