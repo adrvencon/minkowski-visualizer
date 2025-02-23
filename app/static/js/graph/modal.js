@@ -14,11 +14,11 @@ function openLinePolygonModal(isPolygon, submitCallback) {
         newRow.innerHTML = `
             <td><input type="number" step="0.01" value="${x}"></td>
             <td><input type="number" step="0.01" value="${y}"></td>
-            <td><button class="removeRowButton">-</button></td>
+            <td><button class="remove-row-button">×</button></td>
         `;
         tableBody.appendChild(newRow);
 
-        const removeButton = newRow.querySelector('.removeRowButton');
+        const removeButton = newRow.querySelector('.remove-row-button');
         removeButton.addEventListener('click', () => {
             if (tableBody.children.length > 1) {
                 newRow.remove();
@@ -38,7 +38,7 @@ function openLinePolygonModal(isPolygon, submitCallback) {
 
     newAddRowButton.addEventListener('click', () => {
         addRow();
-        const removeButton = document.querySelectorAll('.removeRowButton');
+        const removeButton = document.querySelectorAll('.remove-row-button');
         if (tableBody.children.length > 1) {
             removeButton.disabled = true;
         }

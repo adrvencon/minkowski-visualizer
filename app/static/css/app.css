@@ -195,7 +195,63 @@ body, button, input, select, textarea {
 .coordinate-modal-content {
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   width: 400px;
   text-align: center;
+}
+
+.modal-submit-button {
+  background-color: #7cc28c;
+  border: 2px solid #72b482;
+  color: #ffffff;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.modal-cancel-button {
+  background-color: #ff6b6b;
+  border: 2px solid #ce5656;
+  color: #ffffff;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.add-row-button {
+  background-color: transparent;
+  color: #6F8FAF;
+  border: 2px solid #6F8FAF;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.remove-row-button {
+  background-color: #ff6b6b;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-row-button:disabled {
+  background-color: #aeaeae;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
