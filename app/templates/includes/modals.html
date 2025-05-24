@@ -1,71 +1,154 @@
-<div id="linePolygonModal" class="coordinate-modal" style="display: none;">
-    <div class="coordinate-modal-content">
-        <h2>Enter Coordinates for Figure</h2>
-        <table id="coords-table">
-            <thead>
-                <tr>
-                    <th>X</th>
-                    <th>Y</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Filas dinámicas. -->
-            </tbody>
-        </table>
-        <button class="add-row-button" id="addRowButton">Add Row</button>
-        <div id="linePolygonError" style="display: none; color: red;"></div>
-        <button class="modal-submit-button" id="submitCoordinates">Submit</button>
-        <button class="modal-cancel-button" id="closeModal">Close</button>
+<!-- Line/Polygon Modal -->
+<div id="linePolygonModal" class="shape-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2><i class="fas fa-vector-square"></i> Shape Coordinates</h2>
+            <button class="modal-close-btn" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="input-group">
+                <table class="coord-table" id="coords-table">
+                    <thead>
+                        <tr>
+                            <th>X Coordinate</th>
+                            <th>Y Coordinate</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filas dinámicas. -->
+                        <tr class="coord-row">
+                            <td><input type="number" class="coord-input" placeholder="0.0"></td>
+                            <td><input type="number" class="coord-input" placeholder="0.0"></td>
+                            <td><button class="remove-row-btn" disabled><i class="fas fa-minus"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="add-row-btn" id="addRowButton">
+                    <i class="fas fa-plus"></i> Add Point
+                </button>
+            </div>
+            
+            <div class="error-message" id="linePolygonError">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Please enter valid coordinates</span>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button class="btn-submit" id="submitCoordinates">
+                <i class="fas fa-draw-polygon"></i> Create Shape
+            </button>
+        </div>
     </div>
 </div>
 
-<div id="circleEllipseModal" class="coordinate-modal" style="display: none;">
-    <div class="coordinate-modal-content">
-        <h2>Enter Parameters for Circle or Ellipse</h2>
-        <div>
-            <label for="centerX">Center X:</label>
-            <input id="centerX" type="number" placeholder="e.g. 0" />
+<!-- Circle/Ellipse Modal -->
+<div id="circleEllipseModal" class="shape-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2><i class="fas fa-circle"></i> Ellipse Parameters</h2>
+            <button class="modal-close-btn" id="closeCircleEllipseModal">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <div>
-            <label for="centerY">Center Y:</label>
-            <input id="centerY" type="number" placeholder="e.g. 0" />
+        
+        <div class="modal-body">
+            <div class="param-group range-inputs">
+                <div class="range-group">
+                    <label for="centerX"><i class="fas fa-crosshairs"></i> Center X</label>
+                    <input type="number" id="centerX" class="param-input" placeholder="e.g. 0">
+                </div>
+                <div class="range-group">
+                    <label for="centerY"><i class="fas fa-crosshairs"></i> Center Y</label>
+                    <input type="number" id="centerY" class="param-input" placeholder="e.g. 0">
+                </div>
+            </div>
+
+            <div class="param-group range-inputs">
+                <div class="range-group">
+                    <label for="radiusX"><i class="fas fa-arrows-alt-h"></i> Radius X</label>
+                    <input type="number" id="radiusX" class="param-input" placeholder="e.g. 5" min="0.1" step="0.1">
+                    <p class="input-hint">For circles, use same value as Y</p>
+                </div>
+                <div class="range-group">
+                    <label for="radiusY"><i class="fas fa-arrows-alt-v"></i> Radius Y</label>
+                    <input type="number" id="radiusY" class="param-input" placeholder="e.g. 5" min="0.1" step="0.1">
+                    <p class="input-hint">For circles, use same value as X</p>
+                </div>
+            </div>
+        
+            
+            <div class="error-message" id="circleEllipseError">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Please enter valid parameters</span>
+            </div>
         </div>
-        <div>
-            <label for="radiusX">Radius X (for Circle, use same value as Y):</label>
-            <input id="radiusX" type="number" placeholder="e.g. 5" />
+        
+        <div class="modal-footer">
+            <button class="btn-submit" id="submitCircleEllipse">
+                <i class="fas fa-check-circle"></i> Create Shape
+            </button>
         </div>
-        <div>
-            <label for="radiusY">Radius Y (for Circle, use same value as X):</label>
-            <input id="radiusY" type="number" placeholder="e.g. 5" />
-        </div>
-        <div id="circleEllipseError" style="display: none; color: red;"></div>
-        <button class="modal-submit-button" id="submitCircleEllipse">Submit</button>
-        <button class="modal-cancel-button" id="closeCircleEllipseModal">Close</button>
     </div>
 </div>
 
-<div id="curveModal" class="coordinate-modal" style="display: none;">
-    <div class="coordinate-modal-content">
-        <h2>Enter Parameters for Curve</h2>
-        <div>
-            <label for="curveFunction">Function (e.g., x^2, sin(x), etc.):</label>
-            <input id="curveFunction" type="text" placeholder="e.g., sin(x)" />
+<!-- Curve Modal -->
+<div id="curveModal" class="shape-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2><i class="fas fa-chart-line"></i> Function Curve</h2>
+            <button class="modal-close-btn" id="closeCurveModal">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <div>
-            <label for="rangeStart">Start of Range (e.g., -10):</label>
-            <input id="rangeStart" type="number" placeholder="-10" />
+        
+        <div class="modal-body">
+            <div class="param-group">
+                <label for="curveFunction"><i class="fas fa-function"></i> Function</label>
+                <input type="text" id="curveFunction" class="param-input" placeholder="e.g., sin(x), x^2, log(x)">
+                <p class="input-hint">Use JavaScript math notation (e.g., Math.sin(x))</p>
+            </div>
+            
+            <div class="param-group range-inputs">
+                <div class="range-group">
+                    <label for="rangeStart"><i class="fas fa-arrow-left"></i> Start</label>
+                    <input type="number" id="rangeStart" class="param-input" placeholder="-10">
+                </div>
+                
+                <div class="range-group">
+                    <label for="rangeEnd"><i class="fas fa-arrow-right"></i> End</label>
+                    <input type="number" id="rangeEnd" class="param-input" placeholder="10">
+                </div>
+            </div>
+            
+            <div class="param-group">
+                <label for="stepSize"><i class="fas fa-ruler"></i> Step Size</label>
+                <input type="number" id="stepSize" class="param-input" placeholder="0.1" step="0.01" min="0.001">
+                <p class="input-hint">Smaller steps = smoother curve (but slower)</p>
+            </div>
+            
+            <div class="error-message" id="curveError">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Please enter valid function and range</span>
+            </div>
+            
+            <div class="preview-box">
+                <div class="preview-label">Preview:</div>
+                <div class="preview-content" id="curvePreview">f(x) = </div>
+            </div>
         </div>
-        <div>
-            <label for="rangeEnd">End of Range (e.g., 10):</label>
-            <input id="rangeEnd" type="number" placeholder="10" />
+        
+        <div class="modal-footer">
+            <button class="btn-submit" id="submitCurve">
+                <i class="fas fa-project-diagram"></i> Plot Curve
+            </button>
         </div>
-        <div>
-            <label for="stepSize">Step Size (e.g., 0.1):</label>
-            <input id="stepSize" type="number" placeholder="0.1" step="0.01" />
-        </div>
-        <div id="curveError" style="display: none; color: red;"></div>
-        <button class="modal-submit-button" id="submitCurve">Submit</button>
-        <button class="modal-cancel-button" id="closeCurveModal">Close</button>
     </div>
 </div>
