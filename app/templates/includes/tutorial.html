@@ -1,0 +1,161 @@
+<div id="tutorialOverlay" class="tutorial-overlay">
+    <div class="tutorial-container">
+        <!-- Slide 1: Welcome -->
+        <div class="tutorial-slide active" data-slide="1">
+            <h3>Welcome to Minkowski Sum Visualizer</h3>
+            <p>This tool helps you visualize the Minkowski sum of two convex shapes. Let's walk through the process:</p>
+            <div class="tutorial-img-placeholder">
+                <img src="static/images/tutorial-demo-1.gif" alt="App Preview">
+            </div>
+        </div>
+
+        <!-- Slide 2: Shape Menu -->
+        <div class="tutorial-slide" data-slide="2">
+            <h3>1. Access Shape Tools</h3>
+            <p>Click the <i class="fas fa-shapes"></i> icon on the right to open the shape tools menu.</p>
+            <div class="tutorial-img-placeholder">
+                <img src="static/images/tutorial-demo-2.gif" alt="Opening Menu">
+            </div>
+            <div class="tutorial-note">
+                <i class="fas fa-info-circle"></i> The menu will slide out from the right side.
+            </div>
+        </div>
+
+        <!-- Slide 3: Creating Figures -->
+        <div class="tutorial-slide" data-slide="3">
+            <h3>2. Create Your First Figure</h3>
+            <p>Choose a shape type:</p>
+            <ul class="tutorial-list">
+                <li><strong>Polygon</strong>: Enter vertices coordinates</li>
+                <li><strong>Circle/Ellipse</strong>: Define center and radii</li>
+                <li><strong>Function</strong>: Input a mathematical curve</li>
+            </ul>
+            <div class="tutorial-img-placeholder">
+                <img src="static/images/tutorial-demo-3.gif" alt="Creating Figure">
+            </div>
+            <div class="tutorial-warning">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Figures must be closed and convex for the Minkowski sum.
+            </div>
+        </div>
+
+        <!-- Slide 4: Finish Figure -->
+        <div class="tutorial-slide" data-slide="4">
+            <h3>3. Complete Your Figure</h3>
+            <p>Click <strong>"Finish Figure"</strong> in the bottom-right when done. You'll see a confirmation:</p>
+            <div class="tutorial-img-placeholder">
+                <img src="static/images/tutorial-demo-4.gif" alt="Finishing Figure">
+            </div>
+            <div class="tutorial-tip">
+                <i class="fas fa-lightbulb"></i> Use Undo/Redo buttons if you make mistakes.
+            </div>
+        </div>
+
+        <!-- Slide 5: Second Figure -->
+        <div class="tutorial-slide" data-slide="5">
+            <h3>4. Create Second Figure</h3>
+            <p>Repeat the process to create a second shape. The <strong>"Compute Sum"</strong> button will activate once two valid figures exist.</p>
+            <div class="tutorial-img-placeholder">
+                <img src="static/images/tutorial-demo-5.gif" alt="Second Figure">
+            </div>
+        </div>
+
+        <!-- Slide 6: Compute Sum -->
+        <div class="tutorial-slide" data-slide="6">
+            <h3>5. Calculate Minkowski Sum</h3>
+            <p>Click <strong>"Compute Minkowski Sum"</strong> to visualize the result. Your original figures will remain visible for reference.</p>
+            <div class="tutorial-img-placeholder">
+                <img src="static/images/tutorial-demo-6.gif" alt="Computing Sum">
+            </div>
+        </div>
+
+        <!-- Slide 7: Interaction -->
+        <div class="tutorial-slide" data-slide="7">
+            <h3>6. Explore Your Result</h3>
+            <p>Use these tools to examine your visualization:</p>
+            
+            <div class="tool-grid">
+                <!-- Zoom In -->
+                <div class="tool-card" onclick="alert('Zoom In demo')">
+                    <div class="tool-icon bg-blue">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4>Zoom In</h4>
+                        <p>Enlarge the view</p>
+                    </div>
+                </div>
+                
+                <!-- Zoom Out -->
+                <div class="tool-card" onclick="alert('Zoom Out demo')">
+                    <div class="tool-icon bg-blue">
+                        <i class="fas fa-search-minus"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4>Zoom Out</h4>
+                        <p>Shrink the view</p>
+                    </div>
+                </div>
+                
+                <!-- Pan -->
+                <div class="tool-card" onclick="alert('Pan demo')">
+                    <div class="tool-icon bg-purple">
+                        <i class="fas fa-arrows-alt"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4>Pan View</h4>
+                        <p>Click + drag</p>
+                    </div>
+                </div>
+                
+                <!-- Export -->
+                <div class="tool-card" onclick="alert('Export demo')">
+                    <div class="tool-icon bg-green">
+                        <i class="fas fa-file-export"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4>Export</h4>
+                        <p>Save as image</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Management -->
+        <div class="tutorial-slide" data-slide="8">
+            <h3>7. Managing Your Work</h3>
+            <div class="tutorial-control-grid">
+                <!-- Clear Figure -->
+                <div class="control-card" onclick="alert('Clear Figure clicked')">
+                    <div class="control-icon bg-purple">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <div class="control-text">
+                        <h4>Clear Figure</h4>
+                        <p>Removes current working figure</p>
+                    </div>
+                </div>
+                
+                <!-- New Canvas -->
+                <div class="control-card" onclick="alert('New Canvas clicked')">
+                    <div class="control-icon bg-blue">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="control-text">
+                        <h4>New Canvas</h4>
+                        <p>Clears entire workspace</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="tutorial-nav">
+            <button id="prevSlide" class="tutorial-nav-btn"><i class="fas fa-chevron-left"></i> Back</button>
+            <div class="slide-indicators"></div>
+            <button id="nextSlide" class="tutorial-nav-btn">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+        <button id="closeTutorial" class="tutorial-close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</div>

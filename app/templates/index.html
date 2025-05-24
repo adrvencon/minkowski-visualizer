@@ -25,8 +25,8 @@
                 <i class="fas fa-file-export"></i>
                 <span>Export</span>
             </button>
-            <button class="circle-btn glow" title="Settings">
-                <i class="fas fa-cog"></i>
+            <button id="tutorialBtn" class="circle-btn help-btn" title="Show Tutorial">
+                <i class="fas fa-question"></i>
             </button>
         </div>
     </div>
@@ -55,6 +55,7 @@
 </main>
 {% include 'includes/menu.html' %}
 {% include 'includes/modals.html' %}
+{% include 'includes/tutorial.html' %}
 {% endblock %}
 
 {% block footer %}
@@ -67,9 +68,6 @@
             </button>
             <button id="redo" class="circle-btn" title="Redo">
                 <i class="fas fa-redo"></i>
-            </button>
-            <button class="circle-btn help-btn" title="Help">
-                <i class="fas fa-question"></i>
             </button>
         </div>
         
