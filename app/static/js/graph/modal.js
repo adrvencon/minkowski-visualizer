@@ -5,20 +5,22 @@ function openLinePolygonModal(isPolygon, submitCallback) {
     const submitButton = document.getElementById('submitCoordinates');
     const errorMessage = document.getElementById('linePolygonError');
 
+    modal.classList.add('active');
     tableBody.innerHTML = '';
-    errorMessage.textContent = '';
+    errorMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i><span></span>';
     errorMessage.style.display = 'none';
 
     function addRow(x = '', y = '') {
         const newRow = document.createElement('tr');
+        newRow.className = 'coord-row';
         newRow.innerHTML = `
-            <td><input type="number" step="0.01" value="${x}"></td>
-            <td><input type="number" step="0.01" value="${y}"></td>
-            <td><button class="remove-row-button">×</button></td>
+            <td><input type="number" step="0.01" value="${x}" class="coord-input" placeholder="0.0"></td>
+            <td><input type="number" step="0.01" value="${y}" class="coord-input" placeholder="0.0"></td>
+            <td><button class="remove-row-btn"><i class="fas fa-minus"></i></button></td>
         `;
         tableBody.appendChild(newRow);
 
-        const removeButton = newRow.querySelector('.remove-row-button');
+        const removeButton = newRow.querySelector('.remove-row-btn');
         removeButton.addEventListener('click', () => {
             if (tableBody.children.length > 1) {
                 newRow.remove();
@@ -27,6 +29,7 @@ function openLinePolygonModal(isPolygon, submitCallback) {
         
         if (tableBody.children.length <= 1) {
             removeButton.disabled = true;
+            removeButton.innerHTML = '<i class="fas fa-minus" style="opacity:0.5"></i>';
         }
     }
 
@@ -189,6 +192,21 @@ function openCurveModal(submitCallback) {
     };
 
     modal.style.display = 'flex';
+}
+
+const curveInputs = ['curveFunction', 'rangeStart', 'rangeEnd', 'stepSize'];
+curveInputs.forEach(id => {
+    document.getElementById(id).addEventListener('input', updateCurvePreview);
+});
+
+function updateCurvePreview() {
+    const func = document.getElementById('curveFunction').value || 'x';
+    const start = document.getElementById('rangeStart').value || '-10';
+    const end = document.getElementById('rangeEnd').value || '10';
+    const step = document.getElementById('stepSize').value || '0.1';
+    
+    document.getElementById('curvePreview').textContent = 
+        `f(x) = ${func} from ${start} to ${end} (step: ${step})`;
 }
 
 

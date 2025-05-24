@@ -1,33 +1,55 @@
 {% extends "base.html" %}
 
-{% block title %}Minkowski Sum Calculator{% endblock %}
+{% block title %}Minkowski Sum Visualizer{% endblock %}
 
 {% block header %}
-<header class="header">
-    <div class="title-logo">
-        <img src="static/images/logo.png" alt="Logo" class="logo">
-        <h2 class="title">Minkowski Sum Calculator</h2>
-    </div>
-    <div class="button-container">
-        <button id="restart" class="button">Restart</button>
-        <button id="restartFigure" class="button">Delete Figure</button>
-        <button id="export" class="button">Export</button>
-        <button class="circle-button"><i class="fa-solid fa-gear"></i></button>
+<header class="app-header">
+    <div class="header-gradient"></div>
+    <div class="header-content">
+        <div class="logo-title" onclick="window.location.href='/'">
+            <img src="static/images/logo.png" alt="Logo" class="logo">
+            <h2 class="app-title">
+                Minkowski <span>Sum</span>
+            </h2>
+        </div>
+        <div class="header-controls">
+            <button id="restart" class="header-btn" title="Start fresh">
+                <i class="fas fa-sync-alt"></i>
+                <span>New Canvas</span>
+            </button>
+            <button id="restartFigure" class="header-btn" title="Delete current figure">
+                <i class="fas fa-trash-alt"></i>
+                <span>Clear Figure</span>
+            </button>
+            <button id="export" class="header-btn highlight" title="Export your work">
+                <i class="fas fa-file-export"></i>
+                <span>Export</span>
+            </button>
+            <button class="circle-btn glow" title="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
     </div>
 </header>
 {% endblock %}
 
 {% block content %}
-<main class="main-content">
-    <div class="canvas">
+<main class="graphing-area">
+    <div class="canvas-container">
         <canvas id="myChart"></canvas>
-        <div style="position: absolute; top: 20px; right: 30px; display: flex; gap: 5px;">
-            <button id="zoomIn" class="circle-button">
-                <i class="fa-solid fa-plus"></i>
+        
+        <div class="zoom-controls">
+            <button id="zoomIn" class="circle-btn zoom-btn" title="Zoom In">
+                <i class="fas fa-search-plus"></i>
             </button>
-            <button id="zoomOut" class="circle-button">
-                <i class="fa-solid fa-minus"></i>
+            <button id="zoomOut" class="circle-btn zoom-btn" title="Zoom Out">
+                <i class="fas fa-search-minus"></i>
             </button>
+        </div>
+        
+        <div class="hint-overlay" id="hintOverlay">
+            <i class="fas fa-lightbulb"></i>
+            <span>Select a shape from the menu to start plotting!</span>
         </div>
     </div>
 </main>
@@ -36,15 +58,31 @@
 {% endblock %}
 
 {% block footer %}
-<footer class="footer">
-    <div class="button-container">
-        <button id="undo" class="button"><i class="fas fa-undo fa-lg"></i></button>
-        <button id="redo" class="button"><i class="fas fa-redo fa-lg"></i></button>
-        <button class="circle-button"><i class="fa-solid fa-question"></i></button>
-    </div>
-    <div class="button-container-right">
-        <button id="finishFigure" class="button">Finish Figure</button>
-        <button id="minkowskiSum" class="button" disabled>Compute Minkowski Sum</button>
+<footer class="app-footer">
+    <div class="footer-gradient"></div>
+    <div class="footer-content">
+        <div class="history-controls">
+            <button id="undo" class="circle-btn" title="Undo">
+                <i class="fas fa-undo"></i>
+            </button>
+            <button id="redo" class="circle-btn" title="Redo">
+                <i class="fas fa-redo"></i>
+            </button>
+            <button class="circle-btn help-btn" title="Help">
+                <i class="fas fa-question"></i>
+            </button>
+        </div>
+        
+        <div class="action-controls">
+            <button id="finishFigure" class="action-btn pulse" title="Complete current figure">
+                <i class="fas fa-check-circle"></i>
+                <span>Finish Figure</span>
+            </button>
+            <button id="minkowskiSum" class="action-btn highlight" disabled title="Compute Minkowski Sum">
+                <i class="fas fa-project-diagram"></i>
+                <span>Compute Sum</span>
+            </button>
+        </div>
     </div>
 </footer>
 {% endblock %}

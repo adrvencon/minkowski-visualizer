@@ -5,9 +5,13 @@ from .computations.minkowski import minkowski_sum
 
 bp = Blueprint('main', __name__)
 
-@bp.route('/')
+@bp.route('/graph')
 def index():
     return render_template('index.html')
+
+@bp.route('/')
+def welcome():
+    return render_template('welcome.html')
 
 @bp.route('/validate', methods=['POST'])
 def validate():

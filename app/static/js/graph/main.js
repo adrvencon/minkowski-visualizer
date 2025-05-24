@@ -26,15 +26,15 @@ function createGraph() {
                 min: -10,
                 max: 10,
                 ticks: {
-                    color: 'black',
+                    color: 'white',
                     stepSize: 1,
                 },
                 grid: {
-                    color: '#c0c0c0',
+                    color: 'white',
                     lineWidth: 0.5,
                 },
                 border: {
-                    color: '#636363',
+                    color: 'white',
                 },
             },
             y: {
@@ -42,15 +42,15 @@ function createGraph() {
                 min: -10,
                 max: 10,
                 ticks: {
-                    color: 'black',
+                    color: 'white',
                     stepSize: 1,
                 },
                 grid: {
-                    color: '#c0c0c0',
+                    color: 'white',
                     lineWidth: 0.5,
                 },
                 border: {
-                    color: '#636363',
+                    color: 'white',
                 },
             },
         },
@@ -82,33 +82,62 @@ function createGraph() {
         options: options
     });
 
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const canvas = chart.canvas;
+
+    canvas.addEventListener('mousedown', (event) => {
+        isDragging = true;
+        startX = event.offsetX;
+        startY = event.offsetY;
+    });
+
+    canvas.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+        isDragging = false;
+    });
+
+    canvas.addEventListener('mousemove', (event) => {
+        if (!isDragging) return;
+
+        const deltaX = event.offsetX - startX;
+        const deltaY = event.offsetY - startY;
+
+        const xScale = chart.scales.x;
+        const yScale = chart.scales.y;
+
+        // X Panning
+        const xRange = xScale.max - xScale.min;
+        const xPixelsPerUnit = xScale.width / xRange;
+        const xUnitsMoved = deltaX / xPixelsPerUnit;
+
+        xScale.options.min -= xUnitsMoved;
+        xScale.options.max -= xUnitsMoved;
+
+        // Y Panning
+        const yRange = yScale.max - yScale.min;
+        const yPixelsPerUnit = yScale.height / yRange;
+        const yUnitsMoved = -deltaY / yPixelsPerUnit; // Invert for Y direction
+
+        yScale.options.min -= yUnitsMoved;
+        yScale.options.max -= yUnitsMoved;
+
+        chart.update('none');
+
+        startX = event.offsetX;
+        startY = event.offsetY;
+    });
+
     function updateLegendVisibility() {
         const hasLabels = chart.data.datasets.some(dataset => dataset.label);
         chart.options.plugins.legend.display = hasLabels;
         chart.update();
     }
-
-    function adjustScale() {
-        const chartArea = chart.chartArea;
-        if (!chartArea) return;
-
-        const width = chartArea.right - chartArea.left;
-        const height = chartArea.bottom - chartArea.top;
-        const aspectRatio = width / height;
-
-        const xRange = chart.options.scales.x.max - chart.options.scales.x.min;
-        const yRange = xRange / aspectRatio;
-
-        const yMid = (chart.options.scales.y.max + chart.options.scales.y.min) / 2;
-        chart.options.scales.y.min = yMid - yRange / 2;
-        chart.options.scales.y.max = yMid + yRange / 2;
-
-        chart.update();
-    }
-
-    adjustScale();
-
-    window.addEventListener('resize', adjustScale);
 
     function updateButtonState() {
         const finishFigureButton = document.getElementById('finishFigure');
@@ -122,6 +151,7 @@ function createGraph() {
         restartFigureButton.disabled = savedFigures.length === 2;
         undoButton.disabled = savedFigures.length === 2;
         redoButton.disabled = savedFigures.length === 2;
+
     }
 
     function saveState() {
@@ -237,6 +267,13 @@ function createGraph() {
         redoStack.length = 0;
         savedFigures.length = 0;
         chart.resetZoom();
+        
+        chart.options.scales.x.min = -10;
+        chart.options.scales.x.max = 10;
+        chart.options.scales.y.min = -10;
+        chart.options.scales.y.max = 10;
+        
+        chart.update();
         minkowskiSumComputed = false;
         updateLegendVisibility();
         updateButtonState();
@@ -248,6 +285,12 @@ function createGraph() {
         } else {
             chart.data.datasets = [];
             chart.resetZoom();
+
+            chart.options.scales.x.min = -10;
+            chart.options.scales.x.max = 10;
+            chart.options.scales.y.min = -10;
+            chart.options.scales.y.max = 10;
+
             chart.update();
             updateButtonState();
         }
