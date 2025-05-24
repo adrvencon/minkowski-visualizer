@@ -1044,3 +1044,26 @@ body {
         height: 300px;
     }
 }
+
+/* SweetAlert2 Customizations */
+.swal-popup-custom {
+    background: rgba(20, 25, 45, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.swal2-title {
+    color: white !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.swal2-timer-progress-bar {
+    background: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%) !important;
+}
+
+.swal2-icon {
+    border-color: transparent !important;
+    background-color: transparent !important;
+}

@@ -9,8 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/notyf@3.7.0/notyf.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -27,17 +26,39 @@
         {% endblock %}
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const notyf = new Notyf();
-    
-        window.alert = function(message) {
-            notyf.open({
-                type: 'info',
-                message: message,
-                duration: 3000,
-                backgroundColor: '#6F8FAF',
-                ripple: false,
-            });
+        window.alert = function(message, type = 'info') {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: 'rgba(30, 35, 60, 0.95)',
+                color: '#ffffff',
+                border: '1px solid rgba(0, 219, 222, 0.3)',
+                width: '300px',
+                padding: '0.8rem',
+                backdrop: false,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            
+            const iconColors = {
+                info: '#00dbde',
+                success: '#7cc28c',
+                warning: '#ffb347',
+                error: '#ff6b6b'
+            }
+            
+            Toast.fire({
+                icon: type,
+                title: message,
+                iconColor: iconColors[type] || '#00dbde',
+            })
         };
     </script>
     

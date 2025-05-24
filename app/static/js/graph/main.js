@@ -166,7 +166,7 @@ function createGraph() {
 
     document.getElementById('undo').addEventListener('click', function() {
         if (minkowskiSumComputed) {
-            alert('Cannot undo after Minkowski sum has been computed.');
+            alert('Cannot undo after Minkowski sum has been computed.', "warning");
         } else {
             if (undoStack.length > 0) {
                 const lastState = undoStack.pop();
@@ -178,7 +178,7 @@ function createGraph() {
 
     document.getElementById('redo').addEventListener('click', function() {
         if (minkowskiSumComputed) {
-            alert('Cannot redo after Minkowski sum has been computed.');
+            alert('Cannot redo after Minkowski sum has been computed.', "warning");
         } else {
             if (redoStack.length > 0) {
                 const nextState = redoStack.pop();
@@ -281,7 +281,7 @@ function createGraph() {
 
     document.getElementById('restartFigure').addEventListener('click', function() {
         if (minkowskiSumComputed) {
-            alert('Cannot restart the figure after Minkowski sum has been computed.');
+            alert('Cannot restart the figure after Minkowski sum has been computed.', "warning");
         } else {
             chart.data.datasets = [];
             chart.resetZoom();
@@ -306,7 +306,7 @@ function createGraph() {
 
     document.getElementById('finishFigure').addEventListener('click', async function () {
         if (savedFigures.length === 2) {
-            alert('You have already saved two figures.');
+            alert('You have already saved two figures.', "error");
             return;
         }
 
@@ -330,18 +330,18 @@ function createGraph() {
             savedFigures.push(coords);
     
             if (savedFigures.length === 2) {
-                alert('Two figures saved.');
+                alert('Two figures saved.', "success");
                 undoStack.length = 0;
                 redoStack.length = 0;
                 updateButtonState();
             } else {
-                alert('Figure saved. Please draw the next one.');
+                alert('Figure saved. Please draw the next one.', "success");
             }
     
             chart.data.datasets = [];
             chart.update();
         } catch (error) {
-            alert(`${error.message}`);
+            alert(`${error.message}`, "error");
         }
     });
 
@@ -354,7 +354,7 @@ function createGraph() {
         }
     
         if (minkowskiSumComputed) {
-            alert('Minkowski sum already computed.');
+            alert('Minkowski sum already computed.', "error");
             return;
         }
         try {
@@ -397,7 +397,7 @@ function createGraph() {
                 updateButtonState();
             }
         } else {
-            alert('You must draw two figures before computing the sum.');
+            alert('You must draw two figures before computing the sum.', "warning");
         }
     }
     
