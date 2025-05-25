@@ -106,9 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "retina_detect": true
     });
 
-    // Animación feature cards.
     const featureCards = document.querySelectorAll('.feature-card');
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -130,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const backToTopButton = document.getElementById('back-to-top');
-
     window.addEventListener('scroll', function() {
         if (window.pageYOffset > 300) {
             backToTopButton.classList.add('visible');
@@ -146,4 +143,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    const devCard = document.querySelector('.developer-card');
+    if (devCard) {
+        devCard.addEventListener('mousemove', (e) => {
+            const x = e.clientX - devCard.getBoundingClientRect().left;
+            const y = e.clientY - devCard.getBoundingClientRect().top;
+            
+            const centerX = devCard.offsetWidth / 2;
+            const centerY = devCard.offsetHeight / 2;
+            
+            const angleX = (y - centerY) / 20;
+            const angleY = (centerX - x) / 20;
+            
+            devCard.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+        });
+        
+        devCard.addEventListener('mouseleave', () => {
+            devCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    }
 });
