@@ -808,10 +808,6 @@ body {
     transition: all 0.2s ease;
 }
 
-.coord-row:hover {
-    background: rgba(0, 219, 222, 0.05);
-}
-
 /* Range Input Group (for curve modal) */
 .range-inputs {
     display: flex;
