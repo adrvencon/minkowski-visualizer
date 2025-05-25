@@ -1,3 +1,4 @@
+import { COLOR_PALETTE } from './chart.js';
 import { createGraphDataset } from './chart.js';
 
 function generateCircleOrEllipse(centerX, centerY, radiusX, radiusY, color) {
@@ -62,7 +63,7 @@ function generateMinkowskiSum(coordinates) {
 
     return createGraphDataset(
         closedCoordinates,
-        'rgb',
+        COLOR_PALETTE.minkowski,
         true,
         "Minkowski Sum"
     );

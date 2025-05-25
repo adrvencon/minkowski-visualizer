@@ -1,3 +1,5 @@
+import { COLOR_PALETTE } from './chart.js';
+
 function openLinePolygonModal(isPolygon, submitCallback) {
     const modal = document.getElementById('linePolygonModal');
     const tableBody = document.querySelector('#coords-table tbody');
@@ -75,7 +77,7 @@ function openLinePolygonModal(isPolygon, submitCallback) {
             } else {
                 errorMessage.style.display = 'none';
                 modal.style.display = 'none';
-                submitCallback(coordinatesString, isPolygon, 'blue');
+                submitCallback(coordinatesString, isPolygon, COLOR_PALETTE.polygon);
             }
         })
         .catch(error => {
@@ -129,7 +131,7 @@ function openCircleEllipseModal(submitCallback) {
             } else {
                 errorMessage.style.display = 'none';
                 modal.style.display = 'none';
-                submitCallback(centerX, centerY, radiusX, radiusY, 'red');
+                submitCallback(centerX, centerY, radiusX, radiusY, COLOR_PALETTE.ellipse);
             }
         })
         .catch(error => {
@@ -182,7 +184,7 @@ function openCurveModal(submitCallback) {
             } else {
                 errorMessage.style.display = 'none';
                 modal.style.display = 'none';
-                submitCallback(functionString, rangeStart, rangeEnd, stepSize, 'green');
+                submitCallback(functionString, rangeStart, rangeEnd, stepSize, COLOR_PALETTE.curve);
             }
         })
         .catch(error => {
