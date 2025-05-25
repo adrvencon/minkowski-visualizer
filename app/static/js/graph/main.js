@@ -1,9 +1,11 @@
 import { createBaseFiguresDataset } from './chart.js';
 import { openLinePolygonModal, openCircleEllipseModal, openCurveModal } from './modal.js';
 import { generateCircleOrEllipse, generateCurve, generateLineOrPolygon, generateMinkowskiSum } from './figures.js';
+import { updatePropertiesPanel } from '../includes/properties.js';
 
 function createGraph() {
     const ctx = document.getElementById('myChart').getContext('2d');
+    const propertiesPanel = document.getElementById('properties-panel');
 
     let minkowskiSumComputed = false;
 
@@ -290,6 +292,7 @@ function createGraph() {
     });
 
     document.getElementById('restart').addEventListener('click', function() {
+        propertiesPanel.classList.remove('visible');
         chart.data.datasets = [];
         chart.update();
         undoStack.length = 0;
@@ -424,6 +427,8 @@ function createGraph() {
                 minkowskiSumComputed = true;
                 updateLegendVisibility();
                 updateButtonState();
+
+                updatePropertiesPanel(result)
             }
         } else {
             alert('You must draw two figures before computing the sum.', "warning");

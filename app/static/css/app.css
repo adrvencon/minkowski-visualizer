@@ -212,6 +212,122 @@ body {
     50% { transform: scale(1.1); }
 }
 
+/* Properties Panel */
+.properties-panel {
+    position: absolute;
+    bottom: 90px;
+    left: 30px;
+    width: 240px;
+    background: rgba(20, 25, 45, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 219, 222, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 100;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.properties-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.properties-header {
+    padding: 12px 15px;
+    background: rgba(0, 219, 222, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.properties-header h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #00dbde;
+    font-weight: 600;
+}
+
+.properties-toggle {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.properties-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.properties-content {
+    padding: 12px 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.property-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.property-row:last-child {
+    margin-bottom: 0;
+}
+
+.property-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.property-value {
+    color: white;
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+}
+
+/* Collapsed state */
+.properties-panel.collapsed {
+    height: 60px;
+}
+
+.properties-panel.collapsed .properties-content {
+    display: none;
+}
+
+.properties-panel.collapsed .properties-toggle i {
+    transform: rotate(-90deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .properties-panel {
+        width: 200px;
+        left: 10px;
+        bottom: 10px;
+    }
+    
+    .property-row {
+        flex-direction: column;
+    }
+    
+    .property-value {
+        margin-top: 2px;
+    }
+}
+
 /* Footer Styles */
 .app-footer {
     position: relative;
