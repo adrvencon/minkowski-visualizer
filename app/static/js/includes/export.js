@@ -17,6 +17,7 @@ document.querySelectorAll('.export-option').forEach(option => {
 function exportChart(format) {
   const filename = `minkowski-sum.${format}`;
   const canvas = document.getElementById('myChart');
+  const chart = Chart.getChart(canvas);
   
   switch(format) {
     case 'png':
@@ -27,8 +28,8 @@ function exportChart(format) {
       exportAsJPG(canvas, filename);
       break;
       
-    case 'svg':
-      exportAsSVG(canvas, filename);
+    case 'csv':
+      exportAsCSV(chart, filename);
       break;
       
     case 'pdf':
@@ -51,22 +52,32 @@ function exportAsJPG(canvas, filename) {
   link.click();
 }
 
-// TODO: hacer implementación real de SVG, ahora mismo es el canvas como imagen dentro de un SVG.
-function exportAsSVG(canvas, filename) {
-  const imgData = canvas.toDataURL('image/png');
-  const svgContent = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
-      <image href="${imgData}" width="${canvas.width}" height="${canvas.height}" />
-    </svg>
-  `;
+function exportAsCSV(chart, filename) {
+  if (!chart || !chart.data) return;
 
-  const blob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
+  const datasets = chart.data.datasets;
+
+  let csv = datasets.map((ds, i) => {
+    const label = ds.label || `Figure ${i + 1}`;
+    return `X (${label}),Y (${label})`;
+  }).join(',') + '\n';
+
+  const maxLen = Math.max(...datasets.map(ds => ds.data.length));
+
+  for (let i = 0; i < maxLen; i++) {
+    const row = [];
+    datasets.forEach(ds => {
+      const point = ds.data[i] || {};
+      row.push(point.x ?? '', point.y ?? '');
+    });
+    csv += row.join(',') + '\n';
+  }
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
-  link.href = url;
+  link.href = URL.createObjectURL(blob);
   link.download = filename;
   link.click();
-  URL.revokeObjectURL(url);
 }
 
 function exportAsPDF(canvas, filename) {
