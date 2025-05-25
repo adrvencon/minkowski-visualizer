@@ -17,24 +17,27 @@ function createGraph() {
     };
 
     const options = {
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         responsive: true,
         scales: {
             x: {
                 type: 'linear',
                 position: 'center',
-                min: -10,
-                max: 10,
+                min: -23,
+                max: 23,
                 ticks: {
-                    color: 'white',
+                    color: '#a0a0a0',
                     stepSize: 1,
+                    font: {
+                        size: 12
+                    }
                 },
                 grid: {
-                    color: 'white',
+                    color: '#545454',
                     lineWidth: 0.5,
                 },
                 border: {
-                    color: 'white',
+                    color: '#616161',
                 },
             },
             y: {
@@ -42,21 +45,27 @@ function createGraph() {
                 min: -10,
                 max: 10,
                 ticks: {
-                    color: 'white',
+                    color: '#a0a0a0',
                     stepSize: 1,
+                    font: {
+                        size: 12
+                    }
                 },
                 grid: {
-                    color: 'white',
+                    color: '#545454',
                     lineWidth: 0.5,
                 },
                 border: {
-                    color: 'white',
+                    color: '#616161',
                 },
             },
         },
         plugins: {
             legend: {
                 display: false,
+                labels: {
+                    color: '#d0d0d0',
+                }
             },
             zoom: {
                 zoom: {
@@ -268,8 +277,8 @@ function createGraph() {
         savedFigures.length = 0;
         chart.resetZoom();
         
-        chart.options.scales.x.min = -10;
-        chart.options.scales.x.max = 10;
+        chart.options.scales.x.min = -23;
+        chart.options.scales.x.max = 23;
         chart.options.scales.y.min = -10;
         chart.options.scales.y.max = 10;
         
@@ -281,13 +290,13 @@ function createGraph() {
 
     document.getElementById('restartFigure').addEventListener('click', function() {
         if (minkowskiSumComputed) {
-            alert('Cannot restart the figure after Minkowski sum has been computed.', "warning");
+            alert('Cannot clear the figure after Minkowski sum has been computed. Try creating a new canvas instead.');
         } else {
             chart.data.datasets = [];
             chart.resetZoom();
 
-            chart.options.scales.x.min = -10;
-            chart.options.scales.x.max = 10;
+            chart.options.scales.x.min = -23;
+            chart.options.scales.x.max = 23;
             chart.options.scales.y.min = -10;
             chart.options.scales.y.max = 10;
 
