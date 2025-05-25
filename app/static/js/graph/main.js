@@ -29,7 +29,9 @@ function createGraph() {
                     color: '#a0a0a0',
                     stepSize: 1,
                     font: {
-                        size: 12
+                        family: "'Inter', sans-serif",
+                        size: 11,
+                        weight: 400
                     }
                 },
                 grid: {
@@ -48,7 +50,9 @@ function createGraph() {
                     color: '#a0a0a0',
                     stepSize: 1,
                     font: {
-                        size: 12
+                        family: "'Inter', sans-serif",
+                        size: 11,
+                        weight: 400
                     }
                 },
                 grid: {
@@ -65,6 +69,11 @@ function createGraph() {
                 display: false,
                 labels: {
                     color: '#d0d0d0',
+                    font: {
+                        family: "'Inter', sans-serif",
+                        size: 12,
+                        weight: 400
+                    }
                 }
             },
             zoom: {
@@ -81,6 +90,17 @@ function createGraph() {
                     enabled: true,
                     mode: 'xy',
                 },
+            },
+            tooltip: {
+                bodyFont: {
+                    family: "'Inter', sans-serif",
+                    size: 14
+                },
+                titleFont: {
+                    family: "'Inter', sans-serif",
+                    size: 16,
+                    weight: 500
+                }
             },
         },
     };
