@@ -1,13 +1,31 @@
-def is_closed(coords):
+def is_closed(coords, epsilon=1e-8):
     if len(coords) < 3:
         return False
 
-    first_point = coords[0]
-    last_point = coords[-1]
+    first = coords[0]
+    last = coords[-1]
 
-    return first_point == last_point
+    closes_loop = (
+        abs(first['x'] - last['x']) < epsilon and abs(first['y'] - last['y']) < epsilon
+    )
 
-def is_convex(coords):
+    if closes_loop:
+        return True
+
+    for i in range(len(coords) - 1):
+        a, b = coords[i], coords[i + 1]
+        if (
+            (abs(a['x'] - first['x']) < epsilon and abs(a['y'] - first['y']) < epsilon and
+             abs(b['x'] - last['x']) < epsilon and abs(b['y'] - last['y']) < epsilon)
+            or
+            (abs(b['x'] - first['x']) < epsilon and abs(b['y'] - first['y']) < epsilon and
+             abs(a['x'] - last['x']) < epsilon and abs(a['y'] - last['y']) < epsilon)
+        ):
+            return True
+
+    return False
+
+def is_convex(coords, epsilon = 1e-10):
     if len(coords) < 4:
         return True
 
@@ -16,7 +34,6 @@ def is_convex(coords):
         return (a['x'] - o['x']) * (b['y'] - o['y']) - (a['y'] - o['y']) * (b['x'] - o['x'])
 
     last_sign = 0
-    epsilon = 1e-10  # Tolerancia por precisión en interpolación de puntos.
 
     for i in range(len(coords)):
         o = coords[i]
