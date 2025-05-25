@@ -328,14 +328,6 @@ function createGraph() {
         }
     });
 
-    document.getElementById('export').addEventListener('click', function() {
-        const imageUrl = chart.toBase64Image();
-        const link = document.createElement('a');
-        link.href = imageUrl;
-        link.download = 'graph.png';
-        link.click();
-    });
-
     document.getElementById('finishFigure').addEventListener('click', async function () {
         if (savedFigures.length === 2) {
             alert('You have already saved two figures.', "error");

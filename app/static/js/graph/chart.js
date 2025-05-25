@@ -15,7 +15,6 @@ function createGraphDataset(data, color = COLOR_PALETTE.base, isSolid = false, l
         data: data,
         fill: isSolid ? 'shape' : false,
         borderColor: color,
-        backgroundColor: `${color}40`, // Adds 40% opacity
         borderWidth: 2,
         pointRadius: 3,
         pointBackgroundColor: color,
