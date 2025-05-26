@@ -1,4 +1,4 @@
-import { COLOR_PALETTE } from './chart.js';
+import { COLOR_PALETTE } from '../../core/chart/utils/chartUtils.js'
 
 function openLinePolygonModal(isPolygon, submitCallback) {
     const modal = document.getElementById('linePolygonModal');
@@ -210,6 +210,34 @@ function updateCurvePreview() {
     document.getElementById('curvePreview').textContent = 
         `f(x) = ${func} from ${start} to ${end} (step: ${step})`;
 }
+
+
+function closeModal(modalId, errorMessageId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+
+    if (errorMessageId) {
+        const errorMessage = document.getElementById(errorMessageId);
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+            errorMessage.textContent = '';
+        }
+    }
+}
+    
+document.getElementById('closeModal').addEventListener('click', function() {
+    closeModal('linePolygonModal', 'linePolygonError');
+});
+
+document.getElementById('closeCircleEllipseModal').addEventListener('click', function() {
+    closeModal('circleEllipseModal', 'circleEllipseError');
+});
+
+document.getElementById('closeCurveModal').addEventListener('click', function() {
+    closeModal('curveModal', 'curveError');
+});
 
 
 export { openLinePolygonModal, openCircleEllipseModal, openCurveModal };

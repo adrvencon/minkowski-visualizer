@@ -1,18 +1,23 @@
-document.getElementById('export').addEventListener('click', function() {
-    document.getElementById('exportModal').classList.add('active');
-});
-
-document.querySelector('.export-close').addEventListener('click', function() {
-    document.getElementById('exportModal').classList.remove('active');
-});
-
-document.querySelectorAll('.export-option').forEach(option => {
-    option.addEventListener('click', function() {
-        const format = this.getAttribute('data-format');
-        exportChart(format);
-        document.getElementById('exportModal').classList.remove('active');
+export function setupExportHandler() {
+    document.getElementById('export')?.addEventListener('click', openExportModal);
+    document.querySelector('.export-close')?.addEventListener('click', closeExportModal);
+    
+    document.querySelectorAll('.export-option').forEach(option => {
+        option.addEventListener('click', () => {
+            const format = option.getAttribute('data-format');
+            exportChart(format);
+            closeExportModal();
+        });
     });
-});
+}
+
+function openExportModal() {
+    document.getElementById('exportModal').classList.add('active');
+}
+
+function closeExportModal() {
+    document.getElementById('exportModal').classList.remove('active');
+}
 
 function exportChart(format) {
   const filename = `minkowski-sum.${format}`;

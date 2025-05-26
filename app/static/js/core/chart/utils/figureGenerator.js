@@ -1,5 +1,4 @@
-import { COLOR_PALETTE } from './chart.js';
-import { createGraphDataset } from './chart.js';
+import { COLOR_PALETTE, createGraphDataset } from '../../chart/utils/chartUtils.js'
 
 function generateCircleOrEllipse(centerX, centerY, radiusX, radiusY, color) {
     const points = 100;

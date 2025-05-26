@@ -67,10 +67,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     
     {% block scripts %}
-    <script type="module" src="{{ url_for('static', filename='js/graph/main.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/includes/export.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/includes/menu.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/includes/tutorial.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/pages/graph/graphPage.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/components/panels/menuPanel.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/components/panels/tutorialPanel.js') }}"></script>
     {% endblock %}
 </body>
 </html>

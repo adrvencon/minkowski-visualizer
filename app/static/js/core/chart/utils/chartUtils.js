@@ -38,3 +38,4 @@ function createBaseFiguresDataset(data, label) {
 }
 
 export { createGraphDataset, createBaseFiguresDataset, COLOR_PALETTE };
+
