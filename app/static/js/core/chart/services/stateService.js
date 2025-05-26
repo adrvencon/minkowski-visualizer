@@ -1,3 +1,5 @@
+// TODO: Funcionalidad rota, hay que arreglarla.
+
 let undoStack = [];
 let redoStack = [];
 let savedFigures = [];
