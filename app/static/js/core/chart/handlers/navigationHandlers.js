@@ -1,6 +1,6 @@
 import { 
-    saveState, 
-    restoreState, 
+    undo,
+    redo, 
     clearSavedFigures, 
     clearUndoRedoStacks, 
     setMinkowskiSumComputed,
@@ -12,24 +12,24 @@ export function setupNavigationHandlers(chart) {
     document.getElementById('undo').addEventListener('click', () => {
         if (getMinkowskiSumComputed()) {
             alert('Cannot undo after Minkowski sum has been computed.', "warning");
-        } else {
-            const state = restoreState();
-            if (state) {
-                chart.data.datasets = state;
-                chart.update();
-            }
+            return;
+        }
+        const prev = undo(chart);
+        if (prev) {
+            chart.data.datasets = prev;
+            chart.update();
         }
     });
 
     document.getElementById('redo').addEventListener('click', () => {
         if (getMinkowskiSumComputed()) {
             alert('Cannot redo after Minkowski sum has been computed.', "warning");
-        } else {
-            const state = restoreState();
-            if (state) {
-                chart.data.datasets = state;
-                chart.update();
-            }
+            return;
+        }
+        const next = redo(chart);
+        if (next) {
+            chart.data.datasets = next;
+            chart.update();
         }
     });
 
