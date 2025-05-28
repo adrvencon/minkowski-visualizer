@@ -1,4 +1,4 @@
-def is_closed(coords, epsilon=1e-8):
+def is_closed(coords, epsilon=1e-3):
     if len(coords) < 3:
         return False
 
@@ -25,12 +25,13 @@ def is_closed(coords, epsilon=1e-8):
 
     return False
 
-def is_convex(coords, epsilon = 1e-10):
+def is_convex(coords, epsilon = 1e-3):
     if len(coords) < 4:
         return True
 
     def cross_product(o, a, b):
         # (a - o) x (b - o)
+        
         return (a['x'] - o['x']) * (b['y'] - o['y']) - (a['y'] - o['y']) * (b['x'] - o['x'])
 
     last_sign = 0
