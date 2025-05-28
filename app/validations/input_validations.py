@@ -17,11 +17,14 @@ def validate_circle_or_ellipse(centerX, centerY, radiusX, radiusY):
         raise ValueError("Radius values must be positive.")
     return centerX, centerY, radiusX, radiusY
 
+
 def validate_curve_data(functionString, rangeStart, rangeEnd, stepSize):
-    if not re.match(r'^[0-9a-zA-Z\+\-\*\/\.\^()]*$', functionString):
-        raise ValueError("Invalid function. Only numbers, letters, operators, and parentheses are allowed.")
+    if not re.match(r'^[0-9a-zA-Z_+\-*/^()., ]+$', functionString):
+        raise ValueError(
+            "Invalid function. Use standard math syntax (e.g., sin(x), x^2, log(x, 10))."
+        )
 
     if stepSize <= 0:
-        raise ValueError("Step size cannot be zero or lower.")
+        raise ValueError("Step size must be greater than zero.")
 
     return functionString, rangeStart, rangeEnd, stepSize

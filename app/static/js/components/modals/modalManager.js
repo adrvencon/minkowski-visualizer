@@ -143,6 +143,17 @@ function openCircleEllipseModal(submitCallback) {
     modal.style.display = 'flex';
 }
 
+function isValidMathExpression(exprStr) {
+  try {
+    const node = math.parse(exprStr);
+    const code = node.compile();
+    code.evaluate({ x: 1 });
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
 function openCurveModal(submitCallback) {
     const modal = document.getElementById('curveModal');
     const functionInput = document.getElementById('curveFunction');
@@ -160,6 +171,12 @@ function openCurveModal(submitCallback) {
 
         if (!functionString || isNaN(rangeStart) || isNaN(rangeEnd) || isNaN(stepSize)) {
             errorMessage.textContent = 'All fields are required and must be valid.';
+            errorMessage.style.display = 'block';
+            return;
+        }
+
+        if (!isValidMathExpression(functionString)) {
+            errorMessage.textContent = 'Please enter a valid mathematical expression.';
             errorMessage.style.display = 'block';
             return;
         }
