@@ -20,21 +20,40 @@ function generateCurve(functionString, rangeStart, rangeEnd, stepSize, color) {
     const math = window.math;
     const parsedFunction = math.parse(functionString).compile();
 
-    // Añadimos el punto inicial explícitamente. 
-    const yStart = parsedFunction.evaluate({ x: rangeStart });
-    data.push({ x: rangeStart, y: yStart });
-
-    for (let x = rangeStart + stepSize; x < rangeEnd; x += stepSize) {
-        const y = parsedFunction.evaluate({ x });
-        data.push({ x, y });
+    function isFiniteNumber(value) {
+        return typeof value === 'number' && isFinite(value);
     }
 
-    // Añadimos el punto final explícitamente. 
-    const yEnd = parsedFunction.evaluate({ x: rangeEnd });
-    data.push({ x: rangeEnd, y: yEnd });
+    try {
+        const yStart = parsedFunction.evaluate({ x: rangeStart });
+        if (isFiniteNumber(yStart)) {
+            data.push({ x: rangeStart, y: yStart });
+        }
+    } catch (e) {
+    }
 
+    for (let x = rangeStart; x <= rangeEnd; x += stepSize) {
+        let y;
+        try {
+            y = parsedFunction.evaluate({ x });
+        } catch (e) {
+            continue;
+        }
+        if (isFiniteNumber(y)) {
+            data.push({ x, y });
+        }
+    }
+
+    try {
+        const yEnd = parsedFunction.evaluate({ x: rangeEnd });
+        if (isFiniteNumber(yEnd)) {
+            data.push({ x: rangeEnd, y: yEnd });
+        }
+    } catch (e) {
+    }
     return createGraphDataset(data, color, false);
 }
+
 
 function generateLineOrPolygon(coordinates, isPolygon = false, color) {
     if (coordinates.trim() === "") {
