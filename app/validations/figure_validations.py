@@ -1,3 +1,6 @@
+import numpy as np
+from scipy.spatial import ConvexHull
+
 def is_closed(coords, epsilon=1e-3):
     if len(coords) < 3:
         return False
@@ -26,14 +29,14 @@ def is_closed(coords, epsilon=1e-3):
     return False
 
 def is_convex(coords, epsilon = 1e-3):
+    print(coords)
     if len(coords) < 4:
         return True
 
     def cross_product(o, a, b):
         # (a - o) x (b - o)
-        
         return (a['x'] - o['x']) * (b['y'] - o['y']) - (a['y'] - o['y']) * (b['x'] - o['x'])
-
+    
     last_sign = 0
 
     for i in range(len(coords)):
@@ -52,8 +55,42 @@ def is_convex(coords, epsilon = 1e-3):
 
     return True
 
+def cross(o, a, b):
+    """Producto cruzado de OA y OB (con origen en O)"""
+    return (a['x'] - o['x']) * (b['y'] - o['y']) - (a['y'] - o['y']) * (b['x'] - o['x'])
+
+def convex_hull(points):
+    """Construye la envolvente convexa de un conjunto de puntos 2D."""
+    # Elimina duplicados
+    unique_points = list({(p['x'], p['y']) for p in points})
+    points = [{'x': x, 'y': y} for x, y in sorted(unique_points)]
+
+    if len(points) < 3:
+        return points  # No se puede formar un polígono
+
+    # Construye la parte inferior del casco
+    lower = []
+    for p in points:
+        while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:
+            lower.pop()
+        lower.append(p)
+
+    # Construye la parte superior del casco
+    upper = []
+    for p in reversed(points):
+        while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0:
+            upper.pop()
+        upper.append(p)
+
+    # Concatenamos partes (eliminando el último punto de cada parte porque se repite)
+    return lower[:-1] + upper[:-1]
+
+def is_convex_polygon(points):
+    hull = convex_hull(points)
+    return len(hull) == len(set((p['x'], p['y']) for p in points))
+
 def validate_figure(coords):
     if not is_closed(coords):
         raise ValueError("The figure is not closed.")
-    if not is_convex(coords):
+    if not is_convex_polygon(coords):
         raise ValueError("The figure is not convex.")
