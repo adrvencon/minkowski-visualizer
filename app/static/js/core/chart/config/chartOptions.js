@@ -1,6 +1,8 @@
 export function getChartOptions() {
+    const aspectRatio = 46 / 20;
     return {
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
+        aspectRatio: aspectRatio,
         responsive: true,
         scales: {
             x: {
