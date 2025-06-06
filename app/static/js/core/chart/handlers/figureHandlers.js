@@ -121,7 +121,7 @@ async function handleMinkowskiSum(chart) {
             updateLegendVisibility(chart);
             updateButtonState();
 
-            updatePropertiesPanel(result);
+            updatePropertiesPanel(result, figure1, figure2);
         }
     } else {
         alert('You must draw two figures before computing the sum.', "warning");

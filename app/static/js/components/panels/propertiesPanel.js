@@ -1,24 +1,47 @@
-function updatePropertiesPanel(sumFigure) {
+function updatePropertiesPanel(sumFigure, figure1, figure2) {
     const propertiesPanel = document.getElementById('properties-panel');
 
-    const area = calculateArea(sumFigure);
+    const areaSum = calculateArea(sumFigure);
     const perimeter = calculatePerimeter(sumFigure);
     const vertices = sumFigure.length;
     const bbox = calculateBoundingBox(sumFigure);
     const centroid = calculateCentroid(sumFigure);
     const aspectRatio = calculateAspectRatio(sumFigure);
 
-    document.getElementById('property-area').textContent = area.toFixed(2);
+    const area1 = calculateArea(figure1);
+    const area2 = calculateArea(figure2);
+    const bmCheck = checkBrunnMinkowski(figure1, figure2, sumFigure);
+
+    document.getElementById('property-area-1').textContent = area1.toFixed(2);
+    document.getElementById('property-area-2').textContent = area2.toFixed(2);
+    document.getElementById('property-area-sum').textContent = areaSum.toFixed(2);
     document.getElementById('property-perimeter').textContent = perimeter.toFixed(2);
     document.getElementById('property-vertices').textContent = vertices;
     document.getElementById('property-bbox').textContent = `${bbox.width.toFixed(2)}×${bbox.height.toFixed(2)}`;
     document.getElementById('property-centroid').textContent = `(${centroid.x.toFixed(2)}, ${centroid.y.toFixed(2)})`;
     document.getElementById('property-aspect').textContent = aspectRatio.toFixed(2);
+    document.getElementById('property-bm-holds').textContent = bmCheck.holds ? "Holds" : "Fails";
+    document.getElementById('property-bm-bound').textContent = bmCheck.bound.toFixed(2);
 
     propertiesPanel.classList.add('visible');
     propertiesPanel.classList.remove('collapsed');
 }
 
+function checkBrunnMinkowski(figure1, figure2, sumFigure) {
+    const area1 = calculateArea(figure1);
+    const area2 = calculateArea(figure2);
+    const areaSum = calculateArea(sumFigure);
+
+    const sqrtArea1 = Math.sqrt(area1);
+    const sqrtArea2 = Math.sqrt(area2);
+    const sqrtAreaSum = Math.sqrt(areaSum);
+
+    // √(AreaSum) ≥ √(Area1) + √(AreaB)
+    const holds = sqrtAreaSum >= sqrtArea1 + sqrtArea2;
+    const bound = Math.pow(sqrtArea1 + sqrtArea2, 2);
+
+    return { holds, bound, sqrtArea1, sqrtArea2, sqrtAreaSum };
+}
 document.querySelector('.properties-toggle').addEventListener('click', function() {
     document.querySelector('.properties-panel').classList.toggle('collapsed');
 });
