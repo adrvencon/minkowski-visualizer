@@ -23,8 +23,6 @@
   <strong>Tutor:</strong> Antonio Jesús Cañete Martín
 </p>
 
----
-
 Este proyecto forma parte de un **Trabajo de Fin de Grado en Ingeniería Informática**, cuyo objetivo principal es desarrollar una herramienta para la exploración de la **suma de Minkowski** entre figuras geométricas planas.
 
 Se trata de una aplicación web interactiva que permite al usuario definir figuras convexas, visualizar en tiempo real el resultado de su suma de Minkowski, y analizar sus propiedades métricas.
