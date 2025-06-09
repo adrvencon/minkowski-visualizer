@@ -1,4 +1,4 @@
-import { saveState, addSavedFigure, getSavedFigures, setMinkowskiSumComputed, clearUndoRedoStacks, getMinkowskiSumComputed } from '../services/stateService.js';
+import { saveState, addSavedFigure, getSavedFigures, setMinkowskiSumComputed, clearUndoRedoStacks, getMinkowskiSumComputed } from './stateHandler.js';
 import { generateLineOrPolygon, generateCircleOrEllipse, generateCurve, generateMinkowskiSum } from '../utils/figureGenerator.js';
 import { openLinePolygonModal, openCircleEllipseModal, openCurveModal } from '../../../components/modals/modalManager.js';
 import { createBaseFiguresDataset } from '../utils/chartUtils.js';

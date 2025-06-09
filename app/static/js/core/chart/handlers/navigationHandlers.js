@@ -6,7 +6,7 @@ import {
     setMinkowskiSumComputed,
     getMinkowskiSumComputed,
     getSavedFigures
-} from '../services/stateService.js';
+} from './stateHandler.js';
 
 export function setupNavigationHandlers(chart) {
     document.getElementById('undo').addEventListener('click', () => {
