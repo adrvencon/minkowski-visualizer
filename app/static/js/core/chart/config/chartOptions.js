@@ -1,9 +1,11 @@
 export function getChartOptions() {
-    const aspectRatio = 46 / 20;
+    const xRange = 23 - (-23);
+    const yRange = 10 - (-10);
+    const aspectRatio = xRange / yRange;
     return {
-        maintainAspectRatio: true,
-        aspectRatio: aspectRatio,
+        maintainAspectRatio: false,
         responsive: true,
+        aspectRatio: aspectRatio,
         scales: {
             x: {
                 type: 'linear',
