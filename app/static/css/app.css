@@ -1483,7 +1483,7 @@ body {
 }
 
 .tutorial-img-placeholder {
-    height: 200px;
+    height: 320px;
     background: rgba(0, 219, 222, 0.1);
     border-radius: 10px;
     border: 1px dashed rgba(0, 219, 222, 0.3);
