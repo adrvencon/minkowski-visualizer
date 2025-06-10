@@ -752,6 +752,34 @@ body {
     font-style: italic;
 }
 
+.input-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-warning i {
+    color: #ffc107;
+    min-width: 16px;
+}
+
+@keyframes gentlePulse {
+    0% { opacity: 0.9; }
+    50% { opacity: 1; }
+    100% { opacity: 0.9; }
+}
+
+.input-warning {
+    animation: gentlePulse 2s infinite;
+}
+
 .docs-link {
   color: #00dbde;
   text-decoration: none;
