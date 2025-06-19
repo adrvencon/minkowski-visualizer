@@ -1,6 +1,6 @@
 <div id="tutorialOverlay" class="tutorial-overlay">
     <div class="tutorial-container">
-        <!-- Slide 1: Welcome -->
+
         <div class="tutorial-slide active" data-slide="1">
             <h3>Welcome to Minkowski Sum Visualizer</h3>
             <p>This tool helps you visualize the Minkowski sum of two convex shapes. Let's walk through the process:</p>
@@ -9,7 +9,6 @@
             </div>
         </div>
 
-        <!-- Slide 2: Shape Menu -->
         <div class="tutorial-slide" data-slide="2">
             <h3>1. Access Shape Tools</h3>
             <p>Click the <i class="fas fa-shapes"></i> icon on the right to open the shape tools menu.</p>
@@ -21,7 +20,6 @@
             </div>
         </div>
 
-        <!-- Slide 3: Creating Figures -->
         <div class="tutorial-slide" data-slide="3">
             <h3>2. Create Your First Figure</h3>
             <p>Choose a shape type:</p>
@@ -38,7 +36,6 @@
             </div>
         </div>
 
-        <!-- Slide 4: Finish Figure -->
         <div class="tutorial-slide" data-slide="4">
             <h3>3. Complete Your Figure</h3>
             <p>Click <strong>"Finish Figure"</strong> in the bottom-right when done. If everything goes well, your figure should appear on screen.</p>
@@ -50,7 +47,6 @@
             </div>
         </div>
 
-        <!-- Slide 5: Second Figure -->
         <div class="tutorial-slide" data-slide="5">
             <h3>4. Create Second Figure</h3>
             <p>Repeat the process to create a second shape. The <strong>"Compute Sum"</strong> button will activate once two valid figures exist.</p>
@@ -59,7 +55,6 @@
             </div>
         </div>
 
-        <!-- Slide 6: Compute Sum -->
         <div class="tutorial-slide" data-slide="6">
             <h3>5. Calculate Minkowski Sum</h3>
             <p>Click <strong>"Compute Sum"</strong> to visualize the result. Your original figures will remain visible for reference.</p>
@@ -68,13 +63,12 @@
             </div>
         </div>
 
-        <!-- Slide 7: Interaction -->
         <div class="tutorial-slide" data-slide="7">
             <h3>6. Explore Your Result</h3>
             <p>Use these tools to examine your visualization:</p>
             
             <div class="tool-grid">
-                <!-- Zoom In -->
+
                 <div class="tool-card">
                     <div class="tool-icon bg-blue">
                         <i class="fas fa-search-plus"></i>
@@ -85,7 +79,6 @@
                     </div>
                 </div>
                 
-                <!-- Zoom Out -->
                 <div class="tool-card">
                     <div class="tool-icon bg-blue">
                         <i class="fas fa-search-minus"></i>
@@ -96,7 +89,6 @@
                     </div>
                 </div>
                 
-                <!-- Pan -->
                 <div class="tool-card">
                     <div class="tool-icon bg-purple">
                         <i class="fas fa-arrows-alt"></i>
@@ -107,7 +99,6 @@
                     </div>
                 </div>
                 
-                <!-- Export -->
                 <div class="tool-card">
                     <div class="tool-icon bg-green">
                         <i class="fas fa-file-export"></i>
@@ -120,11 +111,10 @@
             </div>
         </div>
 
-        <!-- Slide 8: Management -->
         <div class="tutorial-slide" data-slide="8">
             <h3>7. Managing Your Work</h3>
             <div class="tutorial-control-grid">
-                <!-- Clear Figure -->
+
                 <div class="control-card">
                     <div class="control-icon bg-purple">
                         <i class="fas fa-trash-alt"></i>
@@ -135,7 +125,6 @@
                     </div>
                 </div>
                 
-                <!-- New Canvas -->
                 <div class="control-card">
                     <div class="control-icon bg-blue">
                         <i class="fas fa-sync-alt"></i>
@@ -148,7 +137,28 @@
             </div>
         </div>
 
-        <!-- Navigation -->
+        <div class="tutorial-slide" data-slide="9">
+            <h3>8. Troubleshooting</h3>
+            <p>When working with shapes, two common issues can prevent successful validation:</p>
+            <ul class="tutorial-list">
+                <li><strong>Convexity Errors</strong>: The shape may not be convex. </li>
+                <li><strong>Closure Errors</strong>: The shape must be closed, meaning the last point must connect back to the first point to form a complete loop.</li>
+            </ul>
+
+            <h4>Common Causes</h4>
+            <ul class="tutorial-list">
+                <li><strong>Incorrect Point Order:</strong> The order in which points or segments are entered affects closure detection. Reordering points may solve closure issues.</li>
+                <li><strong>Implicit Closure:</strong> Sometimes the closing segment is missing from the point list but exists as a separate segment.</li>
+            </ul>
+
+            <h4>Tips to Avoid Issues</h4>
+            <ul class="tutorial-list">
+                <li>Enter points in a consistent, sequential order following the perimeter of the shape.</li>
+                <li>If you encounter closure errors, try reordering points or segments to place the closing edge at the start or end of your list.</li>
+                <li>Use simple, well-defined convex shapes to avoid complex edge cases.</li>
+            </ul>
+        </div>
+
         <div class="tutorial-nav">
             <button id="prevSlide" class="tutorial-nav-btn"><i class="fas fa-chevron-left"></i> Back</button>
             <div class="slide-indicators"></div>
