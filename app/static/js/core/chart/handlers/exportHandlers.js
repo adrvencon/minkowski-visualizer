@@ -87,12 +87,26 @@ function exportAsCSV(chart, filename) {
 
 function exportAsPDF(canvas, filename) {
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
 
-  const imgData = canvas.toDataURL('image/png');
+  const pdf = new jsPDF('l', 'mm', 'a4');
   const pdfWidth = pdf.internal.pageSize.getWidth();
   const pdfHeight = pdf.internal.pageSize.getHeight();
-  const imgAspectRatio = canvas.width / canvas.height;
+
+  const scale = 2;
+  const tempCanvas = document.createElement('canvas');
+  tempCanvas.width = canvas.width * scale;
+  tempCanvas.height = canvas.height * scale;
+  const ctx = tempCanvas.getContext('2d');
+
+  ctx.fillStyle = '#1e1e1e';
+  ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+  ctx.scale(scale, scale);
+  ctx.drawImage(canvas, 0, 0);
+
+  const imgData = tempCanvas.toDataURL('image/png');
+
+  const imgAspectRatio = tempCanvas.width / tempCanvas.height;
   const pdfAspectRatio = pdfWidth / pdfHeight;
 
   let width, height;
@@ -104,6 +118,9 @@ function exportAsPDF(canvas, filename) {
     width = height * imgAspectRatio;
   }
 
-  pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+  const x = (pdfWidth - width) / 2;
+  const y = (pdfHeight - height) / 2;
+
+  pdf.addImage(imgData, 'PNG', x, y, width, height);
   pdf.save(filename);
 }
