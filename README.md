@@ -27,19 +27,10 @@
 
 Este proyecto forma parte de un **Trabajo de Fin de Grado en Ingeniería Informática**, cuyo objetivo principal es desarrollar una herramienta para la exploración de la **suma de Minkowski** entre figuras geométricas planas.
 
-Se trata de una aplicación web interactiva que permite al usuario definir figuras convexas, visualizar en tiempo real el resultado de su suma de Minkowski, y analizar sus propiedades métricas.
-
 ## Acceso al Despliegue
 
 Puedes probar la aplicación desplegada aquí:  
 🔗 [https://adrvencon-tfg.onrender.com/](https://adrvencon-tfg.onrender.com/)
-
-## Objetivos Principales
-
-- Implementar algoritmos para el cálculo de la suma de Minkowski entre figuras convexas (incluyendo polígonos, elipses y curvas simples).
-- Ofrecer una visualización clara y didáctica de las operaciones geométricas realizadas.
-- Permitir al usuario consultar propiedades como el área, perímetro, número de vértices o bounding box de la figura resultante.
-- Diseñar una interfaz web modular orientada a su uso en contextos docentes, divulgativos, o de investigación.
 
 ## Tecnologías Utilizadas
 
