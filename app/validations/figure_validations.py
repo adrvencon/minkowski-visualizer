@@ -28,33 +28,34 @@ def is_closed(coords, epsilon=1e-3):
 def cross(o, a, b):
     return (a['x'] - o['x']) * (b['y'] - o['y']) - (a['y'] - o['y']) * (b['x'] - o['x'])
 
-def is_convex(points):
-    n = len(points)
-    if n < 3:
-        return False
+def convex_hull(points):
+    # Elimina duplicados.
+    unique_points = list({(p['x'], p['y']) for p in points})
+    points = [{'x': x, 'y': y} for x, y in sorted(unique_points)]
 
-    initial_sign = 0
-    for i in range(n):
-        o = points[i]
-        a = points[(i + 1) % n]
-        b = points[(i + 2) % n]
-        current_cross = cross(o, a, b)
-        
-        if current_cross != 0:
-            initial_sign = 1 if current_cross > 0 else -1
-            break
-    
-    # Verificamos que todos los productos cruzados tengan el mismo signo.
-    for i in range(n):
-        o = points[i]
-        a = points[(i + 1) % n]
-        b = points[(i + 2) % n]
-        current_cross = cross(o, a, b)
-        
-        if current_cross * initial_sign < 0:
-            return False  # Hay un cambio de signo? No es convexo.
-    
-    return True
+    if len(points) < 3:
+        return points  # No se puede formar un polígono.
+
+    # Construye la parte inferior del casco.
+    lower = []
+    for p in points:
+        while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:
+            lower.pop()
+        lower.append(p)
+
+    # Construye la parte superior del casco.
+    upper = []
+    for p in reversed(points):
+        while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0:
+            upper.pop()
+        upper.append(p)
+
+    # Concatenamos partes (eliminando el último punto de cada parte porque se repite).
+    return lower[:-1] + upper[:-1]
+
+def is_convex(points):
+    hull = convex_hull(points)
+    return len(hull) == len(set((p['x'], p['y']) for p in points))
 
 def validate_figure(coords):
     if not is_closed(coords):
