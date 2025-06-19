@@ -1,11 +1,11 @@
 const COLOR_PALETTE = {
-    figure1: '#4dc9f6',  // Bright cyan
-    figure2: '#f67019',  // Orange
-    minkowski: '#ffeb3b', // Bright yellow
-    curve: '#acc236',    // Lime green
-    polygon: '#537bc4',  // Soft blue
-    ellipse: '#f53794',  // Pink
-    base: '#8549ba'      // Purple
+    figure1: '#4dc9f6', 
+    figure2: '#f67019', 
+    minkowski: '#ffeb3b',
+    curve: '#acc236',
+    polygon: '#537bc4',
+    ellipse: '#f53794',
+    base: '#8549ba'
 };
 
 

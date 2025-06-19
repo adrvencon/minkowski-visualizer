@@ -36,7 +36,6 @@ function checkBrunnMinkowski(figure1, figure2, sumFigure) {
     const sqrtArea2 = Math.sqrt(area2);
     const sqrtAreaSum = Math.sqrt(areaSum);
 
-    // √(AreaSum) ≥ √(Area1) + √(AreaB)
     const holds = sqrtAreaSum >= sqrtArea1 + sqrtArea2;
     const bound = Math.pow(sqrtArea1 + sqrtArea2, 2);
 
