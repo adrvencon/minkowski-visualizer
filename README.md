@@ -1,75 +1,74 @@
 <p align="center">
-  <img src="app/static/images/logo.png" alt="Logo del Proyecto" width="220" />
+  <img src="app/static/images/logo.png" alt="Project Logo" width="220" />
 </p>
 
-<h1 align="center">Visualizador de la Suma de Minkowski</h1>
+<h1 align="center">Minkowski Sum Visualizer</h1>
 
-<h5 align="center">
-  <em><code>Trabajo de Fin de Grado en Ingeniería Informática</code></em>
-</h5>
+<h4 align="center">
+  <em>Bachelor's Thesis in Software Engineering</em>
+</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.12.6-blue.svg" alt="python-version">
-  <img src="https://img.shields.io/badge/Flask-3.0.3-green.svg" alt="flask-version">
+  <img src="https://img.shields.io/badge/Python-3.12.6-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Flask-3.0.3-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License">
+  
 </p>
-
-<p align="center" style="margin: 2px 0;">
-  <strong>Universidad de Sevilla</strong>
-</p>
-<p align="center" style="margin: 2px 0;">
-  <strong>Autor:</strong> Adriana Vento Conesa
-</p>
-<p align="center" style="margin: 2px 0;">
-  <strong>Tutor:</strong> Antonio Jesús Cañete Martín
+<p align="center">
+  <strong>University of Seville</strong><br/>
+  <strong>Author:</strong> Adriana Vento Conesa<br/>
+  <strong>Supervisor:</strong> Antonio Jesús Cañete Martín
 </p>
 
 <h1></h1>
 
-Este proyecto forma parte de un **Trabajo de Fin de Grado en Ingeniería Informática**, cuyo objetivo principal es desarrollar una herramienta para la exploración de la **suma de Minkowski** entre figuras geométricas planas.
+This project was developed as part of a **Bachelor's Thesis in Software Engineering** at the University of Seville. Its primary goal is to provide an interactive web-based tool for visualizing and exploring the **Minkowski sum** of planar geometric figures.
 
-## Acceso al Despliegue
+The application allows users to define two planar geometric shapes and visualize both their configuration and the resulting Minkowski sum. It provides insight into the properties of the generated sum, and offers the option to export the result. This tool is intended for educational use and applications in computational geometry, robotics, and related fields.
 
-Puedes probar la aplicación desplegada aquí:  
-🔗 [https://adrvencon-tfg.onrender.com/](https://adrvencon-tfg.onrender.com/)
+## Live Deployment
 
-## Tecnologías Utilizadas
+The application is deployed and publicly accessible at: [https://adrvencon-tfg.onrender.com/](https://adrvencon-tfg.onrender.com/)
 
-- **Backend:** Python 3.12.6 con Flask.
-- **Frontend:** HTML5, CSS3, JavaScript, Chart.js.
-- **Documentación:** LaTeX (memoria del TFG).
+## Technologies Used
 
-## Ejecución Local
+- **Backend:** Python 3.12.6 with Flask 3.0.3
+- **Frontend:** HTML5, CSS3, JavaScript, Chart.js
+- **Documentation:** Final report authored in LaTeX. Please contact the author if you are interested in accessing the document.
 
-> Requisitos previos:
-> - Python 3.9+ instalado en el sistema  
-> - pip (gestor de paquetes de Python)
+## Local Deployment
 
-#### 1. Clona el repositorio
+#### 1. **Clone the repository**:
 
 ```bash
 git clone https://github.com/adrvencon/tfg.git
 cd tfg
 ```
 
-#### 2. Crea un entorno virtual (opcional, pero recomendado)
+#### 2. **Create a virtual environment**:
 
 ```bash
 python -m venv venv
-source venv/bin/activate    # En Linux/Mac
-venv\Scripts\activate       # En Windows
+source venv/bin/activate    # Linux/Mac
+venv\Scripts\activate       # Windows
 ```
 
-#### 3. Instala las dependencias
+#### 3. **Install dependencies**:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-#### 4. Ejecuta la aplicación
+#### 4. **Run the application**:
 
 ```bash
 python run.py
 ```
 
-La aplicación estará disponible en `http://127.0.0.1:5000` por defecto.
+By default, the application will be available at: `http://127.0.0.1:5000`
+
+## License
+
+This project is licensed under the terms of the MIT License.  
+See the [LICENSE](LICENSE) file for details.
 
