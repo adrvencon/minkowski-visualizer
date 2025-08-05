@@ -24,7 +24,7 @@
 
 This project was developed as part of a **Bachelor's Thesis in Software Engineering** at the University of Seville. Its primary goal is to provide an interactive web-based tool for visualizing and exploring the **Minkowski sum** of planar geometric figures.
 
-The application allows users to define two planar geometric shapes and visualize both their configuration and the resulting Minkowski sum. It provides insight into the properties of the generated sum, and offers the option to export the result. This tool is intended for educational use and applications in computational geometry, robotics, and related fields.
+TThe application allows users to define two **closed, convex** planar geometric shapes and visualize both their configuration and the resulting Minkowski sum. It provides insight into the properties of the generated sum, and offers the option to export the result. This tool is intended for educational use and applications in computational geometry, robotics, and related fields.
 
 ## Live Deployment
 
