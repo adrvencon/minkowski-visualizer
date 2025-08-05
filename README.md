@@ -67,6 +67,10 @@ python run.py
 
 By default, the application will be available at: `http://127.0.0.1:5000`
 
+## Contributions
+
+This project was developed as part of an academic project and is not currently open to external contributions. Please feel free to fork the project or open an issue for feedback.
+
 ## License
 
 This project is licensed under the terms of the MIT License.  
